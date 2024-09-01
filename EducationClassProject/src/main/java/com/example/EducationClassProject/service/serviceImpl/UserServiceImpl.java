@@ -38,9 +38,21 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    // 유저 전체 조회
     @Override
     @Transactional(readOnly = true)
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
+
+    // 유저 삭제
+    @Override
+    public void deleteUser(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new UserHandler(ErrorStatus._NOT_FOUND_USER);
+        });
+
+        userRepository.delete(user);
+    }
+
 }

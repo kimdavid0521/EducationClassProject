@@ -16,4 +16,7 @@ public interface UserService {
 
     // 유저 전체 조회
     List<User> findAllUsers();
+
+    // 유저 삭제
+    void deleteUser(UUID userId);
 }

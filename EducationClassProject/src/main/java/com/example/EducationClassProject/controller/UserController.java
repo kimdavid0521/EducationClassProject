@@ -39,4 +39,11 @@ public class UserController {
         return BaseResponse.onSuccess(UserConverter.toFindUserListResultDTO(userList));
     }
 
+    // 유저 삭제
+    @DeleteMapping("api/v1/delete/user/{userId}")
+    public String deleteUser(@PathVariable UUID userId) {
+        userService.deleteUser(userId);
+        return "삭제되었습니다";
+    }
+
 }

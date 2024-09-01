@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class UserResponseDTO {
@@ -41,5 +42,14 @@ public class UserResponseDTO {
         private Role role;
         private Verify verify;
         private LocalDateTime createAt;
+    }
+
+    // 유저 전체 조회(list)
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class FindUsersListDTO {
+        List<FindUserResultDTO> userResultDTOList;
     }
 }

@@ -9,6 +9,7 @@ import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,6 +30,13 @@ public class UserController {
     public BaseResponse<UserResponseDTO.FindUserResultDTO> findUser(@PathVariable UUID userId) {
             User user = userService.findUser(userId);
             return BaseResponse.onSuccess(UserConverter.toFindUserResultDTO(user));
+    }
+
+    // 유저 전체 조회
+    @GetMapping("api/v1/find/users")
+    public BaseResponse<UserResponseDTO.FindUsersListDTO> findAllUser() {
+        List<User> userList = userService.findAllUsers();
+        return BaseResponse.onSuccess(UserConverter.toFindUserListResultDTO(userList));
     }
 
 }

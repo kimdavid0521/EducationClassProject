@@ -4,6 +4,8 @@ import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.user.UserRequestDTO;
 import com.example.EducationClassProject.dto.user.UserResponseDTO;
 
+import java.util.List;
+
 public class UserConverter {
 
     // 회원 가입 요청 유저 converter
@@ -38,6 +40,17 @@ public class UserConverter {
                 .role(user.getRole())
                 .verify(user.getVerify())
                 .createAt(user.getCreateAt())
+                .build();
+    }
+
+    // 유저 전체 조회 응답 유저 list converter
+    public static UserResponseDTO.FindUsersListDTO toFindUserListResultDTO(List<User> userList) {
+        List<UserResponseDTO.FindUserResultDTO> usersListDTOList = userList.stream()
+                .map(UserConverter::toFindUserResultDTO)
+                .toList();
+
+        return UserResponseDTO.FindUsersListDTO.builder()
+                .userResultDTOList(usersListDTOList)
                 .build();
     }
 

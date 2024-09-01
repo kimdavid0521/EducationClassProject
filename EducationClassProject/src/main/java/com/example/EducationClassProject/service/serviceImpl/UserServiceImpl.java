@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,11 @@ public class UserServiceImpl implements UserService {
             throw new UserHandler(ErrorStatus._NOT_FOUND_USER); // 유저 uuid로 조회 안될 시 유저 에러핸들러로 에러처리
         });
         return user;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }

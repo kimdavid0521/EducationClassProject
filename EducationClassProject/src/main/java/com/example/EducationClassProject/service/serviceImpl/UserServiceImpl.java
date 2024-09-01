@@ -1,5 +1,8 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
+import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
+import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
+import com.example.EducationClassProject.converter.UserConverter;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.user.UserRequestDTO;
 import com.example.EducationClassProject.repository.UserRepository;
@@ -8,15 +11,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    // 회원가입
     @Override
     @Transactional  // 데이터 변경하는 메서드라 transactional 적용
     public User joinUser(UserRequestDTO.JoinDTO joinDTO) {
-        return null;
+        User user = UserConverter.toUser(joinDTO);
+        return userRepository.save(user);
+    }
+
+    // 유저 조회
+    @Override
+    @Transactional(readOnly = true) // 데이터 조회이므로 성능을 위해 추가
+    public User findUser(UUID userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new UserHandler(ErrorStatus._NOT_FOUND_USER); // 유저 uuid로 조회 안될 시 유저 에러핸들러로 에러처리
+        });
+        return user;
     }
 }

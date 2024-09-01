@@ -40,13 +40,13 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10)")
-    private MemberStatus memberStatus;
+    private MemberStatus memberStatus = MemberStatus.ACTIVE; // 유저 엔티티 생성시 초기값 active로 설정
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    private Verify verify;
+    private Verify verify = Verify.FALSE; // 인증 유무 초기값 false로 설정
 
 
 }

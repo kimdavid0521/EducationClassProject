@@ -2,10 +2,13 @@ package com.example.EducationClassProject.dto.user;
 
 import com.example.EducationClassProject.domain.enums.Gender;
 import com.example.EducationClassProject.domain.enums.Role;
+import lombok.Getter;
+
 
 public class UserRequestDTO {
 
     // user 회원가입 dto
+    @Getter
     public static class JoinDTO {
 
         private String username;

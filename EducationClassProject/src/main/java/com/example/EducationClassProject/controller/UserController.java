@@ -41,9 +41,9 @@ public class UserController {
 
     // 유저 삭제
     @DeleteMapping("api/v1/delete/user/{userId}")
-    public String deleteUser(@PathVariable UUID userId) {
+    public BaseResponse<String> deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
-        return "삭제되었습니다";
+        return BaseResponse.onSuccess("삭제되었습니다.");
     }
 
 }

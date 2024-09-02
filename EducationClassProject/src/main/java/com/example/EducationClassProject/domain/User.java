@@ -50,6 +50,7 @@ public class User extends BaseEntity{
     private Verify verify = Verify.FALSE; // 인증 유무 초기값 false로 설정
 
 
+    // 유저 정보 업데이트
     public void updateUser(UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
         this.username = updateUserInfoDTO.getUsername();
         this.gender = updateUserInfoDTO.getGender();

@@ -46,5 +46,12 @@ public class ClassController {
         return BaseResponse.onSuccess("삭제 되었습니다.");
     }
 
+    // 강의 정보 수정
+    @PatchMapping("/api/v1/class/{classId}")
+    public BaseResponse<ClassResponseDTO.PreviewClassResultDTO> updateClass(@PathVariable Long classId, @RequestBody ClassRequestDTO.UpdateClassDTO updateClassDTO) {
+        Class classEntity = classService.updateClass(classId, updateClassDTO);
+        return BaseResponse.onSuccess(ClassConverter.previewClassResultDTO(classEntity));
+    }
+
 
 }

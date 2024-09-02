@@ -27,4 +27,19 @@ public class ClassRequestDTO {
         private Test classTest;
 
     }
+
+    // 강의 정보 수정 dto
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class UpdateClassDTO {
+        private String className;
+        private String classIntro;
+        private String classExplain;
+        private ClassLevel classLevel;
+        private ClassDay classDay;
+        private LocalDateTime classStartDay;
+        private Test classTest;
+    }
 }

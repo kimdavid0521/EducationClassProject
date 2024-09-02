@@ -4,6 +4,7 @@ import com.example.EducationClassProject.domain.enums.ClassDay;
 import com.example.EducationClassProject.domain.enums.ClassLevel;
 import com.example.EducationClassProject.domain.enums.ClassStatus;
 import com.example.EducationClassProject.domain.enums.Test;
+import com.example.EducationClassProject.dto.classDTO.ClassRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,6 +49,16 @@ public class Class extends BaseEntity{
     @Column(nullable = false, columnDefinition = "VARCHAR(10)")
     private ClassStatus classStatus;
 
+    // 클래스 업데이트
+    public void updateClass(ClassRequestDTO.UpdateClassDTO updateClassDTO) {
+        this.className = updateClassDTO.getClassName();
+        this.classIntro = updateClassDTO.getClassIntro();
+        this.classExplain = updateClassDTO.getClassExplain();
+        this.classLevel = updateClassDTO.getClassLevel();
+        this.classDay = updateClassDTO.getClassDay();
+        this.classStartDay = updateClassDTO.getClassStartDay();
+        this.classTest = updateClassDTO.getClassTest();
+    }
 
 
 }

@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    // 유저 정보 업데이트
     @Override
     @Transactional
     public User updateUserInfo(UUID userId, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {

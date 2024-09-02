@@ -79,4 +79,16 @@ public class ClassServiceImpl implements ClassService {
 
         classRepository.delete(classEntity);
     }
+
+    // 클래스 업데이트
+    @Override
+    @Transactional
+    public Class updateClass(Long classId, ClassRequestDTO.UpdateClassDTO updateClassDTO) {
+        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+        });
+
+        classEntity.updateClass(updateClassDTO); // 더티 체킹을 통한 업데이트
+        return classEntity;
+    }
 }

@@ -20,4 +20,7 @@ public interface ClassService {
 
     // 클래스 삭제
     void deleteClass(Long classId);
+
+    // 클래스 정보 업데이트
+    Class updateClass(Long classId, ClassRequestDTO.UpdateClassDTO updateClassDTO);
 }

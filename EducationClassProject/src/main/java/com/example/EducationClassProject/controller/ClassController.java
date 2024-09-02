@@ -29,7 +29,14 @@ public class ClassController {
     @GetMapping("/api/v1/class/{userId}")
     public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByUser(@PathVariable UUID userId) {
         List<Class> classes = classService.findClassesByUserId(userId);
-        return BaseResponse.onSuccess(ClassConverter.toPreviewClassListByUserId(classes));
+        return BaseResponse.onSuccess(ClassConverter.toPreviewClassList(classes));
+    }
+
+    // class 전체 조회
+    @GetMapping("/api/v1/classes")
+    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findAllClasses() {
+        List<Class> classList = classService.findAllClasses();
+        return BaseResponse.onSuccess(ClassConverter.toPreviewClassList(classList));
     }
 
 

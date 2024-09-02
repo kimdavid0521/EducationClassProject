@@ -14,4 +14,7 @@ public interface ClassService {
 
     // 유저 id로 클래스 객체 조회
     List<Class> findClassesByUserId(UUID userId);
+
+    // 클래스 전체 조회
+    List<Class> findAllClasses();
 }

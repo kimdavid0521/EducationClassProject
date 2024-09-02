@@ -26,8 +26,8 @@ public class ClassConverter {
                 .build();
     }
 
-    // 클래스 리스트 조회시 converter
-    public static ClassResponseDTO.PreviewClassListResultDTO toPreviewClassListByUserId(List<Class> classList) {
+    // 클래스 리스트 조회시 converter (userId로 찾기)
+    public static ClassResponseDTO.PreviewClassListResultDTO toPreviewClassList(List<Class> classList) {
         List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classList.stream()
                 .map(ClassConverter::previewClassResultDTO)
                 .toList();
@@ -35,4 +35,6 @@ public class ClassConverter {
                 .previewClassResultDTOList(classResultDTOList)
                 .build();
     }
+
+
 }

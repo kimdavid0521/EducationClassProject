@@ -11,6 +11,7 @@ import com.example.EducationClassProject.repository.UserClassRepository;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.ClassService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,5 +59,12 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(readOnly = true)
     public List<Class> findClassesByUserId(UUID userId) {
         return classRepository.findClassesByUserId(userId);
+    }
+
+    // 클래스 전체 조회
+    @Override
+    @Transactional(readOnly = true)
+    public List<Class> findAllClasses() {
+        return classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
     }
 }

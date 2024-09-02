@@ -39,5 +39,11 @@ public class ClassController {
         return BaseResponse.onSuccess(ClassConverter.toPreviewClassList(classList));
     }
 
+    // 강의 삭제
+    @DeleteMapping("/api/v1/delete/class/{classId}")
+    public BaseResponse<String> deleteClass(@PathVariable Long classId) {
+
+    }
+
 
 }

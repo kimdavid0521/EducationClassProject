@@ -1,6 +1,7 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
 import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
+import com.example.EducationClassProject.apiPayload.exception.handler.ClassHandler;
 import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
 import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.domain.User;
@@ -66,5 +67,15 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(readOnly = true)
     public List<Class> findAllClasses() {
         return classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
+    }
+
+    @Override
+    @Transactional
+    public void deleteClass(Long classId) {
+        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+        });
+
+        classRepository.delete(classEntity);
     }
 }

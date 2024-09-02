@@ -21,7 +21,7 @@ public class ClassResponseDTO {
         private String classIntro;
     }
 
-    //유저 id로 강의 객체 조회시 dto (List 에 연계하려고 생성)
+    //강의 객체 조회시 dto
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
@@ -33,6 +33,7 @@ public class ClassResponseDTO {
         private ClassLevel classLevel;
     }
 
+    // 강의 조회 리스트 dto
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
@@ -40,4 +41,6 @@ public class ClassResponseDTO {
     public static class PreviewClassListResultDTO {
         List<PreviewClassResultDTO> previewClassResultDTOList;
     }
+
+
 }

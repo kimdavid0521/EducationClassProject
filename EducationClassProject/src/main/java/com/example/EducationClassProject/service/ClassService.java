@@ -17,4 +17,7 @@ public interface ClassService {
 
     // 클래스 전체 조회
     List<Class> findAllClasses();
+
+    // 클래스 삭제
+    void deleteClass(Long classId);
 }

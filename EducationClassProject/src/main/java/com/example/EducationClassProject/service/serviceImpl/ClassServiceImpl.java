@@ -69,6 +69,7 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
     }
 
+    // 클래스 삭제
     @Override
     @Transactional
     public void deleteClass(Long classId) {

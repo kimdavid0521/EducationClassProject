@@ -1,7 +1,7 @@
 package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.dto.user.UserRequestDTO;
+import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 
 import java.util.List;
 import java.util.UUID;

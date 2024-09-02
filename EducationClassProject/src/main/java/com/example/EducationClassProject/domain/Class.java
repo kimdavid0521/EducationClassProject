@@ -50,6 +50,4 @@ public class Class extends BaseEntity{
 
 
 
-
-
 }

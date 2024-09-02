@@ -1,8 +1,8 @@
 package com.example.EducationClassProject.converter;
 
 import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.dto.user.UserRequestDTO;
-import com.example.EducationClassProject.dto.user.UserResponseDTO;
+import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
+import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
 
 import java.util.List;
 

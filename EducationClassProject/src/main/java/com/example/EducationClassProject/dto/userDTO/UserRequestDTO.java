@@ -1,4 +1,4 @@
-package com.example.EducationClassProject.dto.user;
+package com.example.EducationClassProject.dto.userDTO;
 
 import com.example.EducationClassProject.domain.enums.Gender;
 import com.example.EducationClassProject.domain.enums.Role;

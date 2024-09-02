@@ -25,5 +25,4 @@ public class UserClass extends BaseEntity {
     @JoinColumn(name = "class_id")
     private Class aClass;
 
-
 }

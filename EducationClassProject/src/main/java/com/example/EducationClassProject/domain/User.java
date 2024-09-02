@@ -4,7 +4,7 @@ import com.example.EducationClassProject.domain.enums.Gender;
 import com.example.EducationClassProject.domain.enums.MemberStatus;
 import com.example.EducationClassProject.domain.enums.Role;
 import com.example.EducationClassProject.domain.enums.Verify;
-import com.example.EducationClassProject.dto.user.UserRequestDTO;
+import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -4,7 +4,7 @@ import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
 import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
 import com.example.EducationClassProject.converter.UserConverter;
 import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.dto.user.UserRequestDTO;
+import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;

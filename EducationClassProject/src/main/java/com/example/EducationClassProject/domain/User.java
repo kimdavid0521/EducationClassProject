@@ -4,6 +4,7 @@ import com.example.EducationClassProject.domain.enums.Gender;
 import com.example.EducationClassProject.domain.enums.MemberStatus;
 import com.example.EducationClassProject.domain.enums.Role;
 import com.example.EducationClassProject.domain.enums.Verify;
+import com.example.EducationClassProject.dto.user.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -49,4 +50,11 @@ public class User extends BaseEntity{
     private Verify verify = Verify.FALSE; // 인증 유무 초기값 false로 설정
 
 
+    public void updateUser(UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
+        this.username = updateUserInfoDTO.getUsername();
+        this.gender = updateUserInfoDTO.getGender();
+        this.email = updateUserInfoDTO.getEmail();
+        this.phone = updateUserInfoDTO.getPhone();
+        this.role = updateUserInfoDTO.getRole();
+    }
 }

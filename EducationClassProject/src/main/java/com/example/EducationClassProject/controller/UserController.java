@@ -47,4 +47,11 @@ public class UserController {
         return BaseResponse.onSuccess("삭제되었습니다.");
     }
 
+    // 유저 개인정보 업데이트
+    @PatchMapping("/update/user/{userId}") //개인정보 전체가 아닌 일부만 바뀌게 할 것이므로 patch 사용
+    public BaseResponse<UserResponseDTO.FindUserResultDTO> updateUserInfo(@PathVariable UUID userId, @RequestBody UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
+    User user = userService.updateUserInfo(userId, updateUserInfoDTO);
+    return BaseResponse.onSuccess(UserConverter.toFindUserResultDTO(user));
+    }
+
 }

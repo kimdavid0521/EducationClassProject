@@ -56,6 +56,15 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public User updateUserInfo(UUID userId, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new UserHandler(ErrorStatus._NOT_FOUND_USER);
+        });
+
+        user.updateUser(updateUserInfoDTO);  // 유저 엔티티에 작성해준 업데이트 함수 사용하여서 데이터 업데이트
+        return user;
+    }
 
 
 }

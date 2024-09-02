@@ -19,4 +19,7 @@ public interface UserService {
 
     // 유저 삭제
     void deleteUser(UUID userId);
+
+    // 유저 업데이트
+    User updateUserInfo(UUID userId, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO);
 }

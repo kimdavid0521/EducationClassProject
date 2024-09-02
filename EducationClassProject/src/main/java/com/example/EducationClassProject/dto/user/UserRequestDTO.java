@@ -17,4 +17,14 @@ public class UserRequestDTO {
         private String phone;
         private Role role;
     }
+
+    // user 개인정보 수정 dto
+    @Getter
+    public static class UpdateUserInfoDTO {
+        private String username;
+        private Gender gender;
+        private String email;
+        private String phone;
+        private Role role;
+    }
 }

@@ -58,4 +58,9 @@ public class User extends BaseEntity{
         this.phone = updateUserInfoDTO.getPhone();
         this.role = updateUserInfoDTO.getRole();
     }
+
+    // 유저 검증 상태 업데이트
+    public void updateVerify() {
+        this.verify = Verify.TRUE;
+    }
 }

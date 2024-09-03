@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 public class VerifyRequestDTO {
 
     // 인증서 발급 요청 dto
@@ -18,4 +20,5 @@ public class VerifyRequestDTO {
         private String career;
         private String link;
     }
+
 }

@@ -13,4 +13,8 @@ public interface VerifyService {
 
     // 검증서 전체보기 ( 관리자 페이지 )
     List<VerifyCard> previewVerifyCardList();
+
+    // 검증서 수락하기 ( 관리자 페이지 )
+    VerifyCard acceptVerifyCard(Long verifyCardId);
+
 }

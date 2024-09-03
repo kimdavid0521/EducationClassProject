@@ -20,7 +20,11 @@ public enum ErrorStatus implements BaseErrorCode {
     _ALREADY_REQUEST_VERIFY(HttpStatus.FORBIDDEN, "USER4003", "이미 검증 요청을 보낸 사용자입니다."),
 
     // class 에러
-    _NOT_FOUND_CLASS(HttpStatus.NOT_FOUND, "CLASS400", "클래스를 찾을 수 없습니다.");
+    _NOT_FOUND_CLASS(HttpStatus.NOT_FOUND, "CLASS400", "클래스를 찾을 수 없습니다."),
+
+    //verifyCard 에러
+    _NOT_FOUND_VERIFYCARD(HttpStatus.NOT_FOUND, "VERIFY400", "검증서를 확인할 수 없습니다");
+
 
     private final HttpStatus httpStatus;
     private final String code;

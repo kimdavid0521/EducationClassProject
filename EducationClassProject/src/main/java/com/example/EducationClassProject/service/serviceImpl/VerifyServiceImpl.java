@@ -2,6 +2,7 @@ package com.example.EducationClassProject.service.serviceImpl;
 
 import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
 import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
+import com.example.EducationClassProject.apiPayload.exception.handler.VerifyHandler;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.domain.enums.Verify;
@@ -64,5 +65,24 @@ public class VerifyServiceImpl implements VerifyService {
     public List<VerifyCard> previewVerifyCardList() {
         List<VerifyCard> verifyCardList = verifyCardRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 검증서 인증 요청 시간순으로 정렬
         return verifyCardList;
+    }
+
+    // 유저 검증 상태 업데이트
+    @Override
+    @Transactional
+    public VerifyCard acceptVerifyCard(Long verifyCardId) {
+        VerifyCard verifyCard = verifyCardRepository.findById(verifyCardId).orElseThrow(() -> {
+            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
+        });
+
+        User user = verifyCard.getUser();
+
+        if (user.getVerify() == Verify.TRUE) {
+            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
+        }
+
+        user.updateVerify(); // 유저 검증 상태 업데이트
+
+        return verifyCard;
     }
 }

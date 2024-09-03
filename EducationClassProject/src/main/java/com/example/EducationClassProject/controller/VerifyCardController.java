@@ -33,5 +33,12 @@ public class VerifyCardController {
         return BaseResponse.onSuccess(VerifyCardConverter.previewVerifyCardList(verifyCardList));
     }
 
+    // 인증서 수락 ( 관리자 페이지 )
+    @PatchMapping("/api/v1/verify/accept/{verifyCardId}")
+    public BaseResponse<VerifyResponseDTO.PreviewVerifyCardDTO> acceptVerify(@PathVariable Long verifyCardId) {
+        VerifyCard verifyCard = verifyService.acceptVerifyCard(verifyCardId);
+        return BaseResponse.onSuccess(VerifyCardConverter.previewVerifyCardDTO(verifyCard));
+    }
+
 
 }

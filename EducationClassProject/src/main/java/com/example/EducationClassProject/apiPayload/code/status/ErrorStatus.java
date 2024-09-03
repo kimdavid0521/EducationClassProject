@@ -16,6 +16,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // user 에러
     _NOT_FOUND_USER(HttpStatus.NOT_FOUND, "USER400", "유저를 찾을 수 없습니다."),
+    _ALREADY_VERIFIED_USER(HttpStatus.BAD_REQUEST, "USER4002", "이미 선생으로 검증된 유저입니다."),
+    _ALREADY_REQUEST_VERIFY(HttpStatus.FORBIDDEN, "USER4003", "이미 검증 요청을 보낸 사용자입니다."),
 
     // class 에러
     _NOT_FOUND_CLASS(HttpStatus.NOT_FOUND, "CLASS400", "클래스를 찾을 수 없습니다.");

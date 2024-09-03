@@ -30,4 +30,5 @@ public class VerifyCard extends BaseEntity{
     @Column(nullable = false, length = 100)
     private String link;
 
+
 }

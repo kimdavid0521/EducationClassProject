@@ -16,6 +16,7 @@ public class UserConverter {
                 .email(joinDTO.getEmail())
                 .phone(joinDTO.getPhone())
                 .role(joinDTO.getRole())
+                .password(joinDTO.getPassword())
                 .build();
     }
 

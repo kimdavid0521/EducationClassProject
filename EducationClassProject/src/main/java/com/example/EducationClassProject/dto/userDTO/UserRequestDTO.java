@@ -16,6 +16,7 @@ public class UserRequestDTO {
         private String email;
         private String phone;
         private Role role;
+        private String password;
     }
 
     // user 개인정보 수정 dto

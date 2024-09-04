@@ -49,15 +49,15 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     // jwt token 생성 후 response 에 담기
 
-//    @Override
-//    protected void successfulAuthentication(HttpServletResponse response, HttpServletRequest request) {
-//       response.setStatus(200);
-//    }
-//
-//    @Override
-//    protected void unsuccessfulAuthentication(HttpServletResponse response, HttpServletRequest request) {
-//       response.setStatus(401);
-//    }
+    @Override
+    protected void successfulAuthentication(HttpServletResponse response, HttpServletRequest request) {
+       response.setStatus(200);
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletResponse response, HttpServletRequest request) {
+       response.setStatus(401);
+    }
 
 
 }

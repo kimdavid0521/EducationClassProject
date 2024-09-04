@@ -2,6 +2,7 @@ package com.example.EducationClassProject.global;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,13 +16,22 @@ import org.springframework.security.web.SecurityFilterChain;
 //@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
+    private final String[] allowUrl = {
+            "/swagger-ui.html",
+            "/swagger-ui/**",  // 스웨거 url 허용
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/webjars/**",
+    };
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        // http.cors(AbstractHttpConfigurer::disable); // cors 필터 없애는 설정인데 하면 보안에 좋지않음
+        // http.cors(AbstractHttpConfigurer::disable); // cors 필터 비활설화하는 설정인데 하면 보안에 좋지않음
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**", "/api/v1/**").permitAll()
+                .requestMatchers(allowUrl).permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/join/users").permitAll() // 회원가입 url 허용
                 .anyRequest().authenticated());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());

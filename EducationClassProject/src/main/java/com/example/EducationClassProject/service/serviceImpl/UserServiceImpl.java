@@ -8,6 +8,7 @@ import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +20,13 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 회원가입
     @Override
     @Transactional  // 데이터 변경하는 메서드라 transactional 적용
     public User joinUser(UserRequestDTO.JoinDTO joinDTO) {
-        User user = UserConverter.toUser(joinDTO);
+        User user = UserConverter.toUser(joinDTO, passwordEncoder);
         return userRepository.save(user);
     }
 

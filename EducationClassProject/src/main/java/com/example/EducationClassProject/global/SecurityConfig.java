@@ -21,6 +21,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -32,9 +33,8 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
     private final PrincipalDetailService principalDetailService;
-    private JWTAccessDeniedHandler jwtAccessDeniedHandler;
-
-    private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JWTAccessDeniedHandler jwtAccessDeniedHandler;
+    private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private final String[] allowUrl = {
             "/swagger-ui.html",
@@ -60,36 +60,45 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/v1/join/users").permitAll() // 회원가입 url 허용
                 .requestMatchers("/api/v1/class/**").hasRole("TEACHER") // 선생 권한을 가진 자만 클래스 생성 가능
                 .anyRequest().authenticated());
+
         http.formLogin(AbstractHttpConfigurer::disable);
         http.httpBasic(AbstractHttpConfigurer::disable);
-        http.addFilterAt(new TestFilter(), BasicAuthenticationFilter.class); // 테스트 필터 추가
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class); // 로그인 필터 넣어주기
+
+        http.exceptionHandling(
+                (configurer -> configurer
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler)
+                )
+        );
+
+        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
+                UsernamePasswordAuthenticationFilter.class); // 로그인 필터 넣어주기
+        http.addFilterBefore(new JWTFilter(jwtUtil, principalDetailService), UsernamePasswordAuthenticationFilter.class);
+
         http.addFilterBefore(new JWTExceptionFilter(), JWTFilter.class); // jwt 에러 핸들링 필터 배치하기
+        http.addFilterAfter(new TestFilter(), AnonymousAuthenticationFilter.class); // 테스트 필터 추가
 
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // session stateLess 로 관리
 
-        http.exceptionHandling(
-                (configurer ->
-                        configurer
-                                .accessDeniedHandler(jwtAccessDeniedHandler))
-        );
 
-        http.exceptionHandling(
-                (configurer ->
-                        configurer
-                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                .accessDeniedHandler(jwtAccessDeniedHandler)
-                )
-        );
+
+
 
         return http.build();
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+
+    @Bean
+    public JWTFilter jwtFilter() {
+        return new JWTFilter(jwtUtil, principalDetailService);
     }
 
 

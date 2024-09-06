@@ -42,6 +42,7 @@ public class User extends BaseEntity{
     private Integer point;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     @Column(columnDefinition = "VARCHAR(10)")
     private MemberStatus memberStatus = MemberStatus.ACTIVE; // 유저 엔티티 생성시 초기값 active로 설정
 
@@ -49,6 +50,7 @@ public class User extends BaseEntity{
     private Role role;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Verify verify = Verify.FALSE; // 인증 유무 초기값 false로 설정
 
     @OneToOne(fetch = FetchType.LAZY)

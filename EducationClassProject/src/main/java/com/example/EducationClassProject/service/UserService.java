@@ -1,0 +1,29 @@
+package com.example.EducationClassProject.service;
+
+import com.example.EducationClassProject.domain.User;
+import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
+import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface UserService {
+
+    // 유저 회원 가입
+    UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO);
+
+    // 유저 로그인
+    UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO);
+
+    // 유저 조회
+    User findUser(String token);
+
+    // 유저 전체 조회
+    List<User> findAllUsers();
+
+    // 유저 삭제
+    void deleteUser(UUID userId);
+
+    // 유저 업데이트
+    User updateUserInfo(UUID userId, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO);
+}

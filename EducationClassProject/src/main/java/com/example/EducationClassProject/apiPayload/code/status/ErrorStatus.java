@@ -34,8 +34,10 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // auth 에러
     _AUTH_EXPIRE_TOKEN(HttpStatus.UNAUTHORIZED, "TOKEN401", "토큰이 만료되었습니다."),
-    _AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "AUTH001", "인증 실패하였습니다");
+    _AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "AUTH001", "인증 실패하였습니다"),
 
+    // order 에러
+    _NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, "ORDER401", "없는 상품입니다.");
 
 
 

@@ -15,4 +15,15 @@ public class ChatRequestDTO {
         private String content;
         private Long chatroomId;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MakeChatroomRequestDTO {
+        private String roomName;
+        private String owner;
+        private boolean isSecret;
+        private String password;
+    }
 }

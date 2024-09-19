@@ -6,12 +6,7 @@ import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,4 +19,19 @@ public class ChatContoller {
     public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @RequestHeader("Authorization") String token) {
         return BaseResponse.onSuccess(chatService.sendMessage(sendChatMessageDTO, token));
     }
+
+    // 채팅 기록 조회
+    @GetMapping("/chat/{roomId}")
+    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
+        return BaseResponse.onSuccess(chatService.getChatHistory(roomId, token));
+    }
+
+    // 채팅방 생성
+    @PostMapping("/chat/chatroom")
+    public BaseResponse<ChatResponseDTO.MakeChatRoomResponseDTO> makeChatroom(@RequestBody ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, @RequestHeader("Authorization") String token) {
+        return BaseResponse.onSuccess(chatService.makeChatroom(makeChatroomRequestDTO, token));
+    }
+
+
+
 }

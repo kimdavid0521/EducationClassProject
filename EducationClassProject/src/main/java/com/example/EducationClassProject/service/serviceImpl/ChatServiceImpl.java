@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
@@ -25,6 +28,7 @@ public class ChatServiceImpl implements ChatService {
     private final ChatMessageRepository chatMessageRepository;
 
 
+    // 메세지 저장 및 전송
     @Override
     public ChatResponseDTO.ChatMessageResponseDTO sendMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, String token) {
         // 유저 추출
@@ -56,5 +60,54 @@ public class ChatServiceImpl implements ChatService {
 
         simpMessagingTemplate.convertAndSend(destination, chatMessageResponseDTO);
         return chatMessageResponseDTO;
+    }
+
+    // 채팅 기록 조회
+    @Override
+    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token) {
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
+        List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
+                .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
+                        .chatId(chatMessage.getId())
+                        .username(chatMessage.getSender().getUsername())
+                        .content(chatMessage.getContent())
+                        .chatroomId(chatMessage.getChatroom().getId())
+                        .build())
+                .collect(Collectors.toList());
+
+         return ChatResponseDTO.ChatMessageListResponseDTO.builder()
+                 .chatMessageResponseDTOList(chatMessageResponseDTOList)
+                 .build();
+
+    }
+
+    // 채팅방 생성
+    @Override
+    public ChatResponseDTO.MakeChatRoomResponseDTO makeChatroom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        Chatroom chatroom = Chatroom.builder()
+                .name(makeChatroomRequestDTO.getRoomName())
+                .isSecret(makeChatroomRequestDTO.isSecret())
+                .password(makeChatroomRequestDTO.getPassword())
+                .peopleNum(0)
+                .owner(user)
+                .build();
+
+        chatroomRepository.save(chatroom);
+
+        return ChatResponseDTO.MakeChatRoomResponseDTO.builder()
+                .roomName(chatroom.getName())
+                .owner(chatroom.getOwner())
+                .isSecret(chatroom.isSecret())
+                .password(chatroom.getPassword())
+                .build();
+
+
     }
 }

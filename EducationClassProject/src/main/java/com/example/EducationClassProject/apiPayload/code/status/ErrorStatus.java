@@ -47,7 +47,10 @@ public enum ErrorStatus implements BaseErrorCode {
     _ERROR_IAMPORT_VALIDATION(HttpStatus.INTERNAL_SERVER_ERROR, "PAYMENT400", "iamport 검증 중 에러가 발생했습니다."),
     _ERROR_PAYMENT(HttpStatus.PAYMENT_REQUIRED, "PAYMENT401", "iamport 결제 중 에러가 발생했습니다."),
     _PAYMENT_PRICE_ERROR(HttpStatus.CONFLICT, "PAYMENT402", "결제 금액 위변조 의심"),
-    _NOT_FOUND_PRICE(HttpStatus.FORBIDDEN, "PAYMENT403", "현재 등록되지 않은 상품 금액입니다.");
+    _NOT_FOUND_PRICE(HttpStatus.FORBIDDEN, "PAYMENT403", "현재 등록되지 않은 상품 금액입니다."),
+
+    // chat 에러
+    _NOT_FOUND_CHATROOM(HttpStatus.NOT_FOUND, "CHAT400", "채팅방을 찾을 수 없습니다.");
 
 
     private final HttpStatus httpStatus;

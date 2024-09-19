@@ -12,7 +12,7 @@ public class ChatRequestDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class SendChatMessageDTO {
-        private String message;
+        private String content;
         private Long chatroomId;
     }
 }

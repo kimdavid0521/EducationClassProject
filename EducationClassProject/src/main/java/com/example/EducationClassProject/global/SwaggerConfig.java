@@ -1,4 +1,4 @@
-package com.example.EducationClassProject.config;
+package com.example.EducationClassProject.global;
 
 
 import io.swagger.v3.oas.models.Components;

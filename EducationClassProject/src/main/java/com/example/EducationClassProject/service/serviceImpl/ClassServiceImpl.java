@@ -79,7 +79,7 @@ public class ClassServiceImpl implements ClassService {
         User user = jwtUtil.getUserFromToken(AccessToken);
 
         // 중복 확인
-        if (userClassRepository.existByUserAndAClass(user, classEntity)) {
+        if (userClassRepository.existsByUserAndAClass(user.getId(), classEntity.getId())) {
             throw new ClassHandler(ErrorStatus._ALREADY_JOINED_CLASS);
         }
 

@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO) {
         User user = UserConverter.toUser(joinDTO, passwordEncoder);
         userRepository.save(user);
+        user.updateUserPoint(500); // 회원가입시 500 포인트 증정
         return new UserResponseDTO.JoinResultDTO(user.getId(), user.getCreateAt());
     }
 

@@ -22,11 +22,11 @@ public class UserController {
 
 
     // 유저 회원 가입
+    // ( 유저 회원가입시 이벤트로 500포인트 증정되게 설정 )
     @PostMapping("/join/users")
     public BaseResponse<UserResponseDTO.JoinResultDTO> joinUser(@RequestBody UserRequestDTO.JoinDTO joinDTO) {
         return BaseResponse.onSuccess(userService.joinUser(joinDTO)); // solid 원칙
     }
-
 
     // 유저 로그인
     @PostMapping("/login")

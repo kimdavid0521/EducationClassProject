@@ -23,5 +23,4 @@ public class UserChat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
-
 }

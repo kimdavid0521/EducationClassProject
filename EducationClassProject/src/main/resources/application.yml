@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    username: ${username}
+    password: ${password}
+    url: jdbc:mysql://localhost:3306/educationclass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        hbm2ddl:
+          auto: update
+  jwt:
+    secret: 'Epjma2vvW+NPGurRKItFl9f6QMokFo/HwEArhEQS+U4='
+    access-token-time: 3600000
+
+iamport:
+  api_key: ${iamport_Rest_Api_Key}
+  api_secret: ${iamport_Rest_Api_Secret}

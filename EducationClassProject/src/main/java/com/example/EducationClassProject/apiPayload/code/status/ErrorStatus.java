@@ -39,8 +39,13 @@ public enum ErrorStatus implements BaseErrorCode {
     // order 에러
     _NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, "ORDER401", "없는 상품입니다."),
     _NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, "ORDER402", "해당 주문은 존재하지 않습니다."),
-    _NOT_FOUND_ORDER_UID(HttpStatus.NOT_FOUND, "ORDER403", "해당 orderUid 는 유효하지 않습니다.");
+    _NOT_FOUND_ORDER_UID(HttpStatus.NOT_FOUND, "ORDER403", "해당 orderUid 는 유효하지 않습니다."),
 
+    // payment 에러
+    _ERROR_IAMPORT_VALIDATION(HttpStatus.INTERNAL_SERVER_ERROR, "PAYMENT400", "iamport 검증 중 에러가 발생했습니다."),
+    _ERROR_PAYMENT(HttpStatus.PAYMENT_REQUIRED, "PAYMENT401", "iamport 결제 중 에러가 발생했습니다."),
+    _PAYMENT_PRICE_ERROR(HttpStatus.CONFLICT, "PAYMENT402", "결제 금액 위변조 의심"),
+    _NOT_FOUND_PRICE(HttpStatus.FORBIDDEN, "PAYMENT403", "현재 등록되지 않은 상품 금액입니다.");
 
 
     private final HttpStatus httpStatus;

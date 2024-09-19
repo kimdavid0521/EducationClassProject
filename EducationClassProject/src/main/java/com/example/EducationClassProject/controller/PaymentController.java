@@ -1,8 +1,11 @@
 package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
+import com.example.EducationClassProject.dto.PaymentDTO.PaymentRequestDTO;
 import com.example.EducationClassProject.dto.PaymentDTO.PaymentResponseDTO;
 import com.example.EducationClassProject.service.PaymentService;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,9 @@ public class PaymentController {
         return BaseResponse.onSuccess(paymentService.previewPayment(orderId, token));
     }
 
-//    @PostMapping("/validation/Payment")
-//    public BaseResponse<>
+    // client 에서 iamport 측으로 부터 받은 callback 정보로 검증
+    @PostMapping("/validation/Payment")
+    public BaseResponse<IamportResponse<Payment>> validationPayment(@RequestBody PaymentRequestDTO.CallBackDTO callBackDTO, @RequestHeader("Authorization") String token) {
+        return BaseResponse.onSuccess(paymentService.validationPayment(callBackDTO, token));
+    }
 }

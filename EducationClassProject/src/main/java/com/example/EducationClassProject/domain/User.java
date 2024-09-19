@@ -78,4 +78,9 @@ public class User extends BaseEntity{
     public void updateVerify() {
         this.verify = Verify.TRUE;
     }
+
+    // 유저 포인트 갱신 편의 메서드
+    public void updateUserPoint(Integer point) {
+        this.point = point;
+    }
 }

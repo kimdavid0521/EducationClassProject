@@ -26,4 +26,9 @@ public class Payment {
     // 주문 고유 번호
     private String paymentUid;
 
+    // 결제 성공시 업데이트 편의 메서드
+    public void updatePaymentState(PaymentState paymentState, String paymentUid) {
+        this.paymentState = paymentState;
+        this.paymentUid = paymentUid;
+    }
 }

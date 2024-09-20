@@ -49,6 +49,7 @@ public class ChatResponseDTO {
         private String roomName;
         private String ownerName;
         private Integer peopleNum; // 현재 입장되어있는 사람 수
+        private boolean isSecret;
     }
 
     @Getter

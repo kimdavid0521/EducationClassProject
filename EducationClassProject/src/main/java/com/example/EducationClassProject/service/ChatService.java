@@ -22,4 +22,7 @@ public interface ChatService {
 
     // 사용자가 입장되어있는 채팅방 조회
     ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token);
+
+    // 채팅방 나가기
+    String outChatroom(Long roomId, String token);
 }

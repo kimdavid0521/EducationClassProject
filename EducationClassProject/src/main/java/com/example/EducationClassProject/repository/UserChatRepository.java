@@ -17,4 +17,7 @@ public interface UserChatRepository extends JpaRepository<UserChat, Long> {
 
     // 해당 사용자가 참여한 채팅방 리스트
     List<Chatroom> findChatroomByUser_Id(UUID userId);
+
+    // 유저와 채팅방 사이의 관계 가져오기
+    UserChat findByUser_IdAndChatroom_Id(UUID userId, Long chatroomId);
 }

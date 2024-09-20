@@ -52,5 +52,12 @@ public class ChatContoller {
         return BaseResponse.onSuccess(chatService.previewMyChatroom(token));
     }
 
+    // 채팅방 나가기
+    @PostMapping("/chatroom/out/{roomId}")
+    public BaseResponse<String> outChatroom(@PathVariable Long roomId, String token) {
+        return BaseResponse.onSuccess(chatService.outChatroom(roomId, token));
+    }
+
+
 
 }

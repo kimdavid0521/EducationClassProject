@@ -54,7 +54,8 @@ public enum ErrorStatus implements BaseErrorCode {
     _ALREADY_JOIN_USER(HttpStatus.CONFLICT, "CHAT401", "이미 채팅방에 들어와있는 유저 입니다."),
     _NOT_SECRET_ROOM(HttpStatus.CONFLICT,"CHAT402", "해당 채팅방은 비밀 채팅방이 아닙니다."),
     _PASSWORD_ERROR(HttpStatus.UNAUTHORIZED,"CHAT403","비밀번호가 일치하지 않습니다."),
-    _NOT_CHATROOM_MEMBER(HttpStatus.FORBIDDEN, "CHAT404", "해당 유저는 채팅방의 멤버가 아니므로 나갈 수 없습니다.");
+    _NOT_CHATROOM_MEMBER(HttpStatus.FORBIDDEN, "CHAT404", "해당 유저는 채팅방의 멤버가 아니므로 나갈 수 없습니다."),
+    _NONE_PASSWORD(HttpStatus.BAD_REQUEST, "CHAT405", "비밀방임에도 password가 설정되지 않았습니다.");
 
 
     private final HttpStatus httpStatus;

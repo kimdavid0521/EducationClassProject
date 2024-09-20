@@ -94,6 +94,11 @@ public class ChatServiceImpl implements ChatService {
         String AccessToken = token.replace("Bearer ","");
         User user = jwtUtil.getUserFromToken(AccessToken);
 
+        // 비밀번호 설정 검증
+        if (makeChatroomRequestDTO.isSecret() && (makeChatroomRequestDTO.getPassword() == null || makeChatroomRequestDTO.getPassword().isEmpty())) {
+            throw new ChatHandler(ErrorStatus._NONE_PASSWORD);
+        }
+
         Chatroom chatroom = Chatroom.builder()
                 .name(makeChatroomRequestDTO.getRoomName())
                 .isSecret(makeChatroomRequestDTO.isSecret())

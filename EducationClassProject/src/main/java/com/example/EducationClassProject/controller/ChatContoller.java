@@ -46,11 +46,11 @@ public class ChatContoller {
         return BaseResponse.onSuccess(joinRoomId + "번 방에 join 하셨습니다.");
     }
 
-//    // 입장된 채팅방 조회
-//    @GetMapping("/my/chatroom")
-//    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@RequestHeader("Authorization") String token) {
-//
-//    }
+    // 사용자가 입장되어있는 채팅방 조회
+    @GetMapping("/my/chatroom")
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@RequestHeader("Authorization") String token) {
+        return BaseResponse.onSuccess(chatService.previewMyChatroom(token));
+    }
 
 
 }

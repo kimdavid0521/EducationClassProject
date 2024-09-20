@@ -6,6 +6,7 @@ import com.example.EducationClassProject.domain.mapping.UserChat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -14,4 +15,6 @@ public interface UserChatRepository extends JpaRepository<UserChat, Long> {
     //boolean existsByUserAndChatroom(User user, Chatroom chatroom); // 최적화를 위해 id로만 검증하기로 수정
     boolean existsByUser_IdAndChatroom_Id(UUID userId, Long chatroomId);
 
+    // 해당 사용자가 참여한 채팅방 리스트
+    List<Chatroom> findChatroomByUser_Id(UUID userId);
 }

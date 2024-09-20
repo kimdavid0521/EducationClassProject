@@ -32,6 +32,16 @@ public class ChatContoller {
         return BaseResponse.onSuccess(chatService.makeChatroom(makeChatroomRequestDTO, token));
     }
 
+    // 채팅방 입장 ( 비밀번호 없는 채팅방 )
+    @PostMapping("/chat/join/{roomId}")
+    public BaseResponse<String> joinChatroom(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
+        Long joinRoomId = chatService.joinChatroom(roomId, token);
+        return BaseResponse.onSuccess(joinRoomId + "번 방에 join 하셨습니다");
+    }
+
+    // 채팅방 입장 ( 비밀번호 있는 채팅방 )
+
+
 
 
 }

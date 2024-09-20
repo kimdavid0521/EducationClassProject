@@ -39,4 +39,23 @@ public class ChatResponseDTO {
         private boolean isSecret;
         private String password;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PreviewChatroomDTO {
+        private Long chatroomId;
+        private String roomName;
+        private String ownerName;
+        private Integer peopleNum; // 현재 입장되어있는 사람 수
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PreviewChatroomListDTO {
+        List<PreviewChatroomDTO> previewChatroomDTOList;
+    }
 }

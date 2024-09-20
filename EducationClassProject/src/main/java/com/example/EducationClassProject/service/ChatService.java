@@ -16,4 +16,7 @@ public interface ChatService {
 
     // 채팅방 입장 (비밀번호 없는 채팅방)
     Long joinChatroom(Long roomId, String token);
+
+    // 채팅방 입장 (비밀번호 있는 채팅방)
+    Long joinSecretChatroom(ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, Long roomId, String token);
 }

@@ -22,8 +22,15 @@ public class ChatRequestDTO {
     @NoArgsConstructor
     public static class MakeChatroomRequestDTO {
         private String roomName;
-        private String owner;
         private boolean isSecret;
+        private String password;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class JoinSecretChatroomDTO {
         private String password;
     }
 }

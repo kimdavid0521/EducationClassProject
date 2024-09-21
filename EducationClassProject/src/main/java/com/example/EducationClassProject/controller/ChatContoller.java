@@ -1,8 +1,11 @@
 package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
+import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
+import com.example.EducationClassProject.service.ChatCommandService;
+import com.example.EducationClassProject.service.ChatQueryService;
 import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -13,11 +16,14 @@ import org.springframework.web.bind.annotation.*;
 public class ChatContoller {
 
     private final ChatService chatService;
+    private final ChatCommandService chatCommandService;
+    private final ChatQueryService chatQueryService;
 
     // 메세지 전송 및 저장
     @MessageMapping("/chat/message")
     public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatService.sendMessage(sendChatMessageDTO, token));
+        ChatMessage chatMessage = chatCommandService.saveMessage(sendChatMessageDTO, token); // 메세지 저장
+        return BaseResponse.onSuccess(chatQueryService.sendMessage(chatMessage));
     }
 
     // 채팅 기록 조회

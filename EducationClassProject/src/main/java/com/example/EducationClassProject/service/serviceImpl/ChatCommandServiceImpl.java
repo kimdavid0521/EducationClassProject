@@ -6,6 +6,7 @@ import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
+import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ChatMessageRepository;
 import com.example.EducationClassProject.repository.ChatroomRepository;
@@ -45,5 +46,38 @@ public class ChatCommandServiceImpl implements ChatCommandService {
 
         chatMessageRepository.save(chatMessage);
         return chatMessage;
+    }
+
+    // 채팅방 생성
+    @Override
+    @Transactional
+    public ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        // 비밀번호 설정 검증
+        if (makeChatroomRequestDTO.isSecret() && (makeChatroomRequestDTO.getPassword() == null || makeChatroomRequestDTO.getPassword().isEmpty())) {
+            throw new ChatHandler(ErrorStatus._NONE_PASSWORD);
+        }
+
+        Chatroom chatroom = Chatroom.builder()
+                .name(makeChatroomRequestDTO.getRoomName())
+                .isSecret(makeChatroomRequestDTO.isSecret())
+                .password(makeChatroomRequestDTO.getPassword())
+                .peopleNum(0)
+                .owner(user)
+                .build();
+
+        chatroomRepository.save(chatroom);
+
+        return ChatResponseDTO.MakeChatRoomResponseDTO.builder()
+                .roomName(chatroom.getName())
+                .owner(chatroom.getOwner())
+                .isSecret(chatroom.isSecret())
+                .password(chatroom.getPassword())
+                .build();
+
+
     }
 }

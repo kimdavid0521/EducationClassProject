@@ -12,7 +12,7 @@ public interface ChatService {
 //    ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token);
 
     // 채팅방 생성
-    ChatResponseDTO.MakeChatRoomResponseDTO makeChatroom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);
+//    ChatResponseDTO.MakeChatRoomResponseDTO makeChatroom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);
 
     // 채팅방 입장 (비밀번호 없는 채팅방)
     Long joinChatroom(Long roomId, String token);

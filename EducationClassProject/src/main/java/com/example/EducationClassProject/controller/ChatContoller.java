@@ -29,13 +29,13 @@ public class ChatContoller {
     // 채팅 기록 조회
     @GetMapping("/chat/{roomId}")
     public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatService.getChatHistory(roomId, token));
+        return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, token));
     }
 
     // 채팅방 생성
     @PostMapping("/chat/chatroom")
     public BaseResponse<ChatResponseDTO.MakeChatRoomResponseDTO> makeChatroom(@RequestBody ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatService.makeChatroom(makeChatroomRequestDTO, token));
+        return BaseResponse.onSuccess(chatCommandService.makeChatRoom(makeChatroomRequestDTO, token));
     }
 
     // 채팅방 입장 ( 비밀번호 없는 채팅방 )

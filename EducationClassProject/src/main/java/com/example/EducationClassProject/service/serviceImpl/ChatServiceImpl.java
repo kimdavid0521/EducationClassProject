@@ -68,26 +68,26 @@ public class ChatServiceImpl implements ChatService {
 //    }
 
     // 채팅 기록 조회
-    @Override
-    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
-        List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
-                .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
-                        .chatId(chatMessage.getId())
-                        .username(chatMessage.getSender().getUsername())
-                        .content(chatMessage.getContent())
-                        .chatroomId(chatMessage.getChatroom().getId())
-                        .build())
-                .collect(Collectors.toList());
-
-         return ChatResponseDTO.ChatMessageListResponseDTO.builder()
-                 .chatMessageResponseDTOList(chatMessageResponseDTOList)
-                 .build();
-
-    }
+//    @Override
+//    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token) {
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
+//        List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
+//                .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
+//                        .chatId(chatMessage.getId())
+//                        .username(chatMessage.getSender().getUsername())
+//                        .content(chatMessage.getContent())
+//                        .chatroomId(chatMessage.getChatroom().getId())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//         return ChatResponseDTO.ChatMessageListResponseDTO.builder()
+//                 .chatMessageResponseDTOList(chatMessageResponseDTOList)
+//                 .build();
+//
+//    }
 
     // 채팅방 생성
     @Override

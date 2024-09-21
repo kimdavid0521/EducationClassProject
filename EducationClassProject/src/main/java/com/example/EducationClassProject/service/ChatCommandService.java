@@ -7,4 +7,7 @@ public interface ChatCommandService {
 
     // 채팅 저장
     ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, String token);
+
+    // 채팅방 생성
+
 }

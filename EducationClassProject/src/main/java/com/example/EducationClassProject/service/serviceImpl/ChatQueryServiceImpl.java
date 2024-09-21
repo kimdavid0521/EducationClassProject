@@ -1,18 +1,26 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
 import com.example.EducationClassProject.domain.ChatMessage;
+import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
+import com.example.EducationClassProject.jwt.JWTUtil;
+import com.example.EducationClassProject.repository.ChatMessageRepository;
 import com.example.EducationClassProject.service.ChatQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ChatQueryServiceImpl implements ChatQueryService {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
+    private final ChatMessageRepository chatMessageRepository;
+    private final JWTUtil jwtUtil;
 
     // 메세지 전송
     @Override
@@ -28,5 +36,28 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
         simpMessagingTemplate.convertAndSend(destination, chatMessageResponseDTO);
         return chatMessageResponseDTO;
+    }
+
+    // 채팅 기록 조회
+    @Override
+    @Transactional(readOnly = true)
+    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
+        List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
+                .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
+                        .chatId(chatMessage.getId())
+                        .username(chatMessage.getSender().getUsername())
+                        .content(chatMessage.getContent())
+                        .chatroomId(chatMessage.getChatroom().getId())
+                        .build())
+                .collect(Collectors.toList());
+
+        return ChatResponseDTO.ChatMessageListResponseDTO.builder()
+                .chatMessageResponseDTOList(chatMessageResponseDTOList)
+                .build();
     }
 }

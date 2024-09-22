@@ -2,6 +2,7 @@ package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
 import com.example.EducationClassProject.domain.ChatMessage;
+import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.service.ChatCommandService;
@@ -41,7 +42,8 @@ public class ChatContoller {
     // 채팅방 입장 ( 비밀번호 없는 채팅방 )
     @PostMapping("/chat/join/{roomId}")
     public BaseResponse<String> joinChatroom(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        Long joinRoomId = chatService.joinChatroom(roomId, token);
+        Chatroom chatroom = chatQueryService.findChatroom(roomId);
+        Long joinRoomId = chatCommandService.joinChatRoom(token, chatroom);
         return BaseResponse.onSuccess(joinRoomId + "번 방에 참여하셨습니다.");
     }
 

@@ -122,31 +122,31 @@ public class ChatServiceImpl implements ChatService {
 //    }
 
     // 비밀번호 없는 채팅방 입장
-    @Override
-    public Long joinChatroom(Long roomId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
-            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
-        });
-
-        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
-
-        if (isAlreadyJoin) {
-            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
-        }
-
-        UserChat userChat = UserChat.builder()
-                .user(user)
-                .chatroom(chatroom)
-                .build();
-
-        userChatRepository.save(userChat);
-
-        return userChat.getChatroom().getId();
-    }
+//    @Override
+//    public Long joinChatroom(Long roomId, String token) {
+//
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
+//            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
+//        });
+//
+//        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+//
+//        if (isAlreadyJoin) {
+//            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
+//        }
+//
+//        UserChat userChat = UserChat.builder()
+//                .user(user)
+//                .chatroom(chatroom)
+//                .build();
+//
+//        userChatRepository.save(userChat);
+//
+//        return userChat.getChatroom().getId();
+//    }
 
     // 채팅방 입장 (비밀번호 있는 채팅방)
     @Override

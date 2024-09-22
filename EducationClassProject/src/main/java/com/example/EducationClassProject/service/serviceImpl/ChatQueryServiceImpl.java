@@ -1,10 +1,14 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
+import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
+import com.example.EducationClassProject.apiPayload.exception.handler.ChatHandler;
 import com.example.EducationClassProject.domain.ChatMessage;
+import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ChatMessageRepository;
+import com.example.EducationClassProject.repository.ChatroomRepository;
 import com.example.EducationClassProject.service.ChatQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,6 +24,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final ChatMessageRepository chatMessageRepository;
+    private final ChatroomRepository chatroomRepository;
     private final JWTUtil jwtUtil;
 
     // 메세지 전송
@@ -60,4 +65,14 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .chatMessageResponseDTOList(chatMessageResponseDTOList)
                 .build();
     }
+
+    @Override
+    public Chatroom findChatroom(Long roomId) {
+        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
+            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
+        });
+        return chatroom;
+    }
+
+
 }

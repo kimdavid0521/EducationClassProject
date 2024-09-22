@@ -1,6 +1,7 @@
 package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.ChatMessage;
+import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 
 public interface ChatQueryService {
@@ -10,4 +11,7 @@ public interface ChatQueryService {
 
     // 채팅 기록 조회
     ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token);
+
+    // 채팅방 조회
+    Chatroom findChatroom(Long roomId);
 }

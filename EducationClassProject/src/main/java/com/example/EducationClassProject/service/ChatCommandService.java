@@ -1,6 +1,7 @@
 package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.ChatMessage;
+import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 
@@ -11,4 +12,7 @@ public interface ChatCommandService {
 
     // 채팅방 생성
     ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);
+
+    // 채팅방 입장
+    Long joinChatRoom(String token, Chatroom chatroom);
 }

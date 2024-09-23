@@ -21,7 +21,7 @@ public interface ChatService {
 //    Long joinSecretChatroom(ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, Long roomId, String token);
 
     // 전체 채팅방 조회
-    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token);
+//    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token);
 
     // 사용자가 입장되어있는 채팅방 조회
     ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token);

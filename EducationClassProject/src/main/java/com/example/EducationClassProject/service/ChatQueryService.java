@@ -14,4 +14,7 @@ public interface ChatQueryService {
 
     // 채팅방 조회
     ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, String token);
+
+    // 전체 채팅방 조회
+    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token);
 }

@@ -53,7 +53,7 @@ public class ClassController {
     // class 전체 조회
     @GetMapping("/classes")
     public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findAllClasses() {
-        return BaseResponse.onSuccess(classService.findAllClasses());
+        return BaseResponse.onSuccess(classQueryService.findAllClasses());
     }
 
     // 강의 삭제 ( owner 만 허용 )

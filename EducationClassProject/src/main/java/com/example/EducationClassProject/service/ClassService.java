@@ -23,7 +23,7 @@ public interface ClassService {
 //    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token);
 
     // 클래스 전체 조회
-    ClassResponseDTO.PreviewClassListResultDTO findAllClasses();
+//    ClassResponseDTO.PreviewClassListResultDTO findAllClasses();
 
     // 클래스 삭제
     void deleteClass(Long classId, String token);

@@ -149,23 +149,23 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // 클래스 전체 조회
-    @Override
-    @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findAllClasses() {
-        List<Class> classes = classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
-                .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
-                        .classId(clas.getId())
-                        .className(clas.getClassName())
-                        .classIntro(clas.getClassIntro())
-                        .classExplain(clas.getClassExplain())
-                        .classLevel(clas.getClassLevel())
-                        .build())
-                .collect(Collectors.toList());
-        return ClassResponseDTO.PreviewClassListResultDTO.builder()
-                .previewClassResultDTOList(classResultDTOList)
-                .build();
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public ClassResponseDTO.PreviewClassListResultDTO findAllClasses() {
+//        List<Class> classes = classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
+//        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+//                .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
+//                        .classId(clas.getId())
+//                        .className(clas.getClassName())
+//                        .classIntro(clas.getClassIntro())
+//                        .classExplain(clas.getClassExplain())
+//                        .classLevel(clas.getClassLevel())
+//                        .build())
+//                .collect(Collectors.toList());
+//        return ClassResponseDTO.PreviewClassListResultDTO.builder()
+//                .previewClassResultDTOList(classResultDTOList)
+//                .build();
+//    }
 
     // 클래스 삭제 (owner 만 가능)
     @Override

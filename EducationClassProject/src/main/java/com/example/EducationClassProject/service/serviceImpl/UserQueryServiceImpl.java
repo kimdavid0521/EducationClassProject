@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserQueryServiceImpl implements UserQueryService {
@@ -36,5 +39,51 @@ public class UserQueryServiceImpl implements UserQueryService {
         String token = jwtUtil.createAccessToken(user.getEmail(), user.getRole().toString());
 
         return new UserResponseDTO.LoginResultDTO(user.getId(),token);
+    }
+
+    // 유저 개인 조회
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponseDTO.FindUserResultDTO findUser(String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        return new UserResponseDTO.FindUserResultDTO(user.getId(),
+                user.getUsername(),
+                user.getGender(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getPoint(),
+                user.getMemberStatus(),
+                user.getRole(),
+                user.getVerify(),
+                user.getCreateAt());
+    }
+
+    // 유저 전체 조회
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponseDTO.FindUsersListDTO findAllUsers() {
+
+        List<User> users = userRepository.findAll();
+        List<UserResponseDTO.FindUserResultDTO> userResultDTOList = users.stream()
+                .map(user -> UserResponseDTO.FindUserResultDTO.builder()
+                        .userId(user.getId())
+                        .username(user.getUsername())
+                        .gender(user.getGender())
+                        .email(user.getEmail())
+                        .phone(user.getPhone())
+                        .point(user.getPoint())
+                        .memberState(user.getMemberStatus())
+                        .role(user.getRole())
+                        .verify(user.getVerify())
+                        .createAt(user.getCreateAt())
+                        .build())
+                .collect(Collectors.toList());
+
+        return UserResponseDTO.FindUsersListDTO.builder()
+                .userResultDTOList(userResultDTOList)
+                .build();
     }
 }

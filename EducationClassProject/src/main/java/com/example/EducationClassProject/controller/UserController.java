@@ -41,26 +41,26 @@ public class UserController {
     //유저 단건 조회
     @GetMapping("/find/user")
     public BaseResponse<UserResponseDTO.FindUserResultDTO> findUser(@RequestHeader("Authorization") String token) {
-            return BaseResponse.onSuccess(userService.findUser(token)); // solid 원칙
+            return BaseResponse.onSuccess(userQueryService.findUser(token)); // solid 원칙
     }
 
     // 유저 전체 조회
     @GetMapping("/find/users")
     public BaseResponse<UserResponseDTO.FindUsersListDTO> findAllUser() {
-        return BaseResponse.onSuccess(userService.findAllUsers());
+        return BaseResponse.onSuccess(userQueryService.findAllUsers());
     }
 
-    // 유저 삭제
+    // 유저 삭제 ( 회원 탈퇴 )
     @DeleteMapping("/delete/user")
     public BaseResponse<String> deleteUser(@RequestHeader("Authorization") String token) {
-        userService.deleteUser(token);
+        userCommandService.deleteUser(token);
         return BaseResponse.onSuccess("삭제되었습니다.");
     }
 
     // 유저 개인정보 업데이트
     @PatchMapping("/update/user") //개인정보 전체가 아닌 일부만 바뀌게 할 것이므로 patch 사용
     public BaseResponse<UserResponseDTO.FindUserResultDTO> updateUserInfo(@RequestBody UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO, @RequestHeader("Authorization") String token) {
-    return BaseResponse.onSuccess(userService.updateUserInfo(token, updateUserInfoDTO));
+    return BaseResponse.onSuccess(userCommandService.updateUserInfo(token, updateUserInfoDTO));
     }
 
 }

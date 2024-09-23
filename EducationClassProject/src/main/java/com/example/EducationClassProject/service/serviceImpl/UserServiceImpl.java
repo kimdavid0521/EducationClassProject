@@ -54,75 +54,75 @@ public class UserServiceImpl implements UserService {
 
 
     // 유저 조회
-    @Override
-    @Transactional(readOnly = true) // 데이터 조회이므로 성능을 위해 추가
-    public UserResponseDTO.FindUserResultDTO findUser(String token) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-        return new UserResponseDTO.FindUserResultDTO(user.getId(),
-                user.getUsername(),
-                user.getGender(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getPoint(),
-                user.getMemberStatus(),
-                user.getRole(),
-                user.getVerify(),
-                user.getCreateAt());
-    }
+//    @Override
+//    @Transactional(readOnly = true) // 데이터 조회이므로 성능을 위해 추가
+//    public UserResponseDTO.FindUserResultDTO findUser(String token) {
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//        return new UserResponseDTO.FindUserResultDTO(user.getId(),
+//                user.getUsername(),
+//                user.getGender(),
+//                user.getEmail(),
+//                user.getPhone(),
+//                user.getPoint(),
+//                user.getMemberStatus(),
+//                user.getRole(),
+//                user.getVerify(),
+//                user.getCreateAt());
+//    }
 
     // 유저 전체 조회
-    @Override
-    @Transactional(readOnly = true)
-    public UserResponseDTO.FindUsersListDTO findAllUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserResponseDTO.FindUserResultDTO> userResultDTOList = users.stream()
-                .map(user -> UserResponseDTO.FindUserResultDTO.builder()
-                        .userId(user.getId())
-                        .username(user.getUsername())
-                        .gender(user.getGender())
-                        .email(user.getEmail())
-                        .phone(user.getPhone())
-                        .point(user.getPoint())
-                        .memberState(user.getMemberStatus())
-                        .role(user.getRole())
-                        .verify(user.getVerify())
-                        .createAt(user.getCreateAt())
-                        .build())
-                .collect(Collectors.toList());
-
-        return UserResponseDTO.FindUsersListDTO.builder()
-                .userResultDTOList(userResultDTOList)
-                .build();
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public UserResponseDTO.FindUsersListDTO findAllUsers() {
+//        List<User> users = userRepository.findAll();
+//        List<UserResponseDTO.FindUserResultDTO> userResultDTOList = users.stream()
+//                .map(user -> UserResponseDTO.FindUserResultDTO.builder()
+//                        .userId(user.getId())
+//                        .username(user.getUsername())
+//                        .gender(user.getGender())
+//                        .email(user.getEmail())
+//                        .phone(user.getPhone())
+//                        .point(user.getPoint())
+//                        .memberState(user.getMemberStatus())
+//                        .role(user.getRole())
+//                        .verify(user.getVerify())
+//                        .createAt(user.getCreateAt())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        return UserResponseDTO.FindUsersListDTO.builder()
+//                .userResultDTOList(userResultDTOList)
+//                .build();
+//    }
 
     // 유저 삭제
-    @Override
-    @Transactional
-    public void deleteUser(String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-        userRepository.delete(user);
-    }
+//    @Override
+//    @Transactional
+//    public void deleteUser(String token) {
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//        userRepository.delete(user);
+//    }
 
     // 유저 정보 업데이트
-    @Override
-    @Transactional
-    public UserResponseDTO.FindUserResultDTO updateUserInfo(String token, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-        user.updateUser(updateUserInfoDTO);  // 유저 엔티티에 작성해준 업데이트 함수 사용하여서 데이터 업데이트 (더티 체킹을 통한 업데이트 구현)
-        return new UserResponseDTO.FindUserResultDTO(user.getId(),
-                user.getUsername(),
-                user.getGender(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getPoint(),
-                user.getMemberStatus(),
-                user.getRole(),
-                user.getVerify(),
-                user.getCreateAt());
-    }
+//    @Override
+//    @Transactional
+//    public UserResponseDTO.FindUserResultDTO updateUserInfo(String token, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//        user.updateUser(updateUserInfoDTO);  // 유저 엔티티에 작성해준 업데이트 함수 사용하여서 데이터 업데이트 (더티 체킹을 통한 업데이트 구현)
+//        return new UserResponseDTO.FindUserResultDTO(user.getId(),
+//                user.getUsername(),
+//                user.getGender(),
+//                user.getEmail(),
+//                user.getPhone(),
+//                user.getPoint(),
+//                user.getMemberStatus(),
+//                user.getRole(),
+//                user.getVerify(),
+//                user.getCreateAt());
+//    }
 
 
 }

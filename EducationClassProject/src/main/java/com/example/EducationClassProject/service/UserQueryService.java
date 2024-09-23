@@ -7,4 +7,10 @@ public interface UserQueryService {
 
     // 유저 로그인
     UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO);
+
+    // 개인 유저 조회
+    UserResponseDTO.FindUserResultDTO findUser(String token);
+
+    // 유저 전체 조회
+    UserResponseDTO.FindUsersListDTO findAllUsers();
 }

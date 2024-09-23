@@ -16,14 +16,14 @@ public interface UserService {
 //    UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO);
 
     // 유저 조회
-    UserResponseDTO.FindUserResultDTO findUser(String token);
+//    UserResponseDTO.FindUserResultDTO findUser(String token);
 
     // 유저 전체 조회
-    UserResponseDTO.FindUsersListDTO findAllUsers();
+//    UserResponseDTO.FindUsersListDTO findAllUsers();
 
     // 유저 삭제
-    void deleteUser(String token);
+//    void deleteUser(String token);
 
     // 유저 업데이트
-    UserResponseDTO.FindUserResultDTO updateUserInfo(String token, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO);
+//    UserResponseDTO.FindUserResultDTO updateUserInfo(String token, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO);
 }

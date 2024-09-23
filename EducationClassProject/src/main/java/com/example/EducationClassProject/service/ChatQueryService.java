@@ -17,4 +17,7 @@ public interface ChatQueryService {
 
     // 전체 채팅방 조회
     ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token);
+
+    // 사용자가 참여하고있는 채팅방 조회
+    ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token);
 }

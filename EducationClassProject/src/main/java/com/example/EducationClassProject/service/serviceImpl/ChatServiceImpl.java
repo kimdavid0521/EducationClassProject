@@ -206,26 +206,26 @@ public class ChatServiceImpl implements ChatService {
 //    }
 
     // 사용자가 참여하고 있는 채팅방 조회
-    @Override
-    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        List<Chatroom> chatroomList = userChatRepository.findChatroomByUser_Id(user.getId());
-        List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
-                .map(chatroom -> ChatResponseDTO.PreviewChatroomDTO.builder()
-                        .isSecret(chatroom.isSecret())
-                        .chatroomId(chatroom.getId())
-                        .roomName(chatroom.getName())
-                        .ownerName(chatroom.getOwner().getUsername())
-                        .peopleNum(chatroom.getPeopleNum())
-                        .build())
-                .collect(Collectors.toList());
-
-        return ChatResponseDTO.PreviewChatroomListDTO.builder()
-                .previewChatroomDTOList(chatroomDTOList)
-                .build();
-    }
+//    @Override
+//    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token) {
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        List<Chatroom> chatroomList = userChatRepository.findChatroomByUser_Id(user.getId());
+//        List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
+//                .map(chatroom -> ChatResponseDTO.PreviewChatroomDTO.builder()
+//                        .isSecret(chatroom.isSecret())
+//                        .chatroomId(chatroom.getId())
+//                        .roomName(chatroom.getName())
+//                        .ownerName(chatroom.getOwner().getUsername())
+//                        .peopleNum(chatroom.getPeopleNum())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        return ChatResponseDTO.PreviewChatroomListDTO.builder()
+//                .previewChatroomDTOList(chatroomDTOList)
+//                .build();
+//    }
 
     // 채팅방 나가기
     @Override

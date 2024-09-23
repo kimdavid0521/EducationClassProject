@@ -64,7 +64,7 @@ public class ChatContoller {
     // 사용자가 입장되어있는 채팅방 조회
     @GetMapping("/my/chatroom")
     public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatService.previewMyChatroom(token));
+        return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(token));
     }
 
     // 채팅방 나가기

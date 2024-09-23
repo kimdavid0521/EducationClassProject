@@ -5,10 +5,12 @@ import com.example.EducationClassProject.apiPayload.exception.handler.ClassHandl
 import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.enums.Verify;
+import com.example.EducationClassProject.domain.mapping.UserClass;
 import com.example.EducationClassProject.dto.classDTO.ClassRequestDTO;
 import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ClassRepository;
+import com.example.EducationClassProject.repository.UserClassRepository;
 import com.example.EducationClassProject.service.ClassCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class ClassCommandServiceImpl implements ClassCommandService {
 
     private final JWTUtil jwtUtil;
     private final ClassRepository classRepository;
+    private final UserClassRepository userClassRepository;
 
     // 클래스 생성
     @Override
@@ -54,5 +57,23 @@ public class ClassCommandServiceImpl implements ClassCommandService {
         user.updateUserPoint(currentPoint - 200);
 
         return new ClassResponseDTO.CreateClassResultDTO(classEntity.getId(), classEntity.getClassName(), classEntity.getClassIntro());
+    }
+
+    // 강의 참여
+    @Override
+    @Transactional
+    public Long joinClass(ClassResponseDTO.ResultFindClass resultFindClass) {
+
+        UserClass userClass = UserClass.builder()
+                .user(resultFindClass.getUser())
+                .aClass(resultFindClass.getAClass())
+                .build();
+        userClassRepository.save(userClass);
+
+        int currentPoint = resultFindClass.getUser().getPoint();
+
+        // 포인트 차감
+        resultFindClass.getUser().updateUserPoint(currentPoint - 100);
+        return resultFindClass.getAClass().getId();
     }
 }

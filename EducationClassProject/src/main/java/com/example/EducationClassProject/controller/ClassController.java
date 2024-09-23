@@ -5,7 +5,7 @@ import com.example.EducationClassProject.converter.ClassConverter;
 import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.dto.classDTO.ClassRequestDTO;
 import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
-import com.example.EducationClassProject.service.ClassService;
+import com.example.EducationClassProject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +19,8 @@ public class ClassController {
     //solid 원칙 리팩토링
 
     private final ClassService classService;
+    private final ClassQueryService classQueryService;
+    private final ClassCommandService classCommandService;
 
     // class 생성 ( 선생 )
     // ( class 생성시 200 포인트 차감 되게 설정 )
@@ -31,7 +33,8 @@ public class ClassController {
     // ( class 참여시 100 포인트 차감되게 설정 )
     @PostMapping("/join/{classId}")
     public BaseResponse<String> joinClass(@PathVariable Long classId, @RequestHeader("Authorization") String token) {
-        Long joinClassId = classService.joinClass(classId, token);
+        ClassResponseDTO.ResultFindClass resultFindClass = classQueryService.findClass(classId, token);
+        Long joinClassId = classCommandService.joinClass(resultFindClass);
         return BaseResponse.onSuccess("강의에 참여했습니다. 강의실 id: " + joinClassId);
     }
 

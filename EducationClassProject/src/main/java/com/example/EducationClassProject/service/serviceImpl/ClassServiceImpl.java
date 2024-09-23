@@ -69,36 +69,36 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // class 참여 요청 보내기
-    @Override
-    public Long joinClass(Long classId, String token) {
-        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
-            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
-        });
+//    @Override
+//    public Long joinClass(Long classId, String token) {
+//        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+//            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+//        });
+//
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        // 중복 확인
+//        if (userClassRepository.existsByUserAndAClass(user.getId(), classEntity.getId())) {
+//            throw new ClassHandler(ErrorStatus._ALREADY_JOINED_CLASS);
+//        }
 
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+//        // 잔여 포인트 검증
+//        int currentPoint = user.getPoint();
+//        if (currentPoint < 100) {
+//            throw new ClassHandler(ErrorStatus._JOIN_POINT_NOT_ENOUGH);
+//        }
 
-        // 중복 확인
-        if (userClassRepository.existsByUserAndAClass(user.getId(), classEntity.getId())) {
-            throw new ClassHandler(ErrorStatus._ALREADY_JOINED_CLASS);
-        }
-
-        // 잔여 포인트 검증
-        int currentPoint = user.getPoint();
-        if (currentPoint < 100) {
-            throw new ClassHandler(ErrorStatus._JOIN_POINT_NOT_ENOUGH);
-        }
-
-        UserClass userClass = UserClass.builder()
-                .user(user)
-                .aClass(classEntity)
-                .build();
-        userClassRepository.save(userClass);
-
-        // 포인트 차감
-        user.updateUserPoint(currentPoint - 100);
-        return classEntity.getId();
-    }
+//        UserClass userClass = UserClass.builder()
+//                .user(user)
+//                .aClass(classEntity)
+//                .build();
+//        userClassRepository.save(userClass);
+//
+//        // 포인트 차감
+//        user.updateUserPoint(currentPoint - 100);
+//        return classEntity.getId();
+//    }
 
     // 클래스 객체 유저 id로 조회화기
     @Override

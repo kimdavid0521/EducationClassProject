@@ -14,5 +14,8 @@ public interface ChatCommandService {
     ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);
 
     // 채팅방 입장
-    Long joinChatRoom(String token, Chatroom chatroom);
+    Long joinChatRoom(ChatResponseDTO.ResultFindChatroom resultFindChatroom);
+
+    // 채팅방 입장 ( 비밀번호 있는 채팅방 )
+    Long joinSecretChatRoom(ChatResponseDTO.ResultFindChatroom resultFindChatroom, ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO);
 }

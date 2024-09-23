@@ -149,40 +149,40 @@ public class ChatServiceImpl implements ChatService {
 //    }
 
     // 채팅방 입장 (비밀번호 있는 채팅방)
-    @Override
-    public Long joinSecretChatroom(ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, Long roomId, String token) {
+//    @Override
+//    public Long joinSecretChatroom(ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, Long roomId, String token) {
 
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
+//            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
+//        });
 
-        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
-            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
-        });
-
-        if (!chatroom.isSecret()) {
-            throw new ChatHandler(ErrorStatus._NOT_SECRET_ROOM);
-        }
-
-        if (!joinSecretChatroomDTO.getPassword().equals(chatroom.getPassword())) {
-            throw new ChatHandler(ErrorStatus._PASSWORD_ERROR);
-        }
-
-        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
-
-        if (isAlreadyJoin) {
-            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
-        }
-
-        UserChat userChat = UserChat.builder()
-                .user(user)
-                .chatroom(chatroom)
-                .build();
-
-        userChatRepository.save(userChat);
-
-        return userChat.getChatroom().getId();
-
-    }
+//        if (!chatroom.isSecret()) {
+//            throw new ChatHandler(ErrorStatus._NOT_SECRET_ROOM);
+//        }
+//
+//        if (!joinSecretChatroomDTO.getPassword().equals(chatroom.getPassword())) {
+//            throw new ChatHandler(ErrorStatus._PASSWORD_ERROR);
+//        }
+//
+//        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+//
+//        if (isAlreadyJoin) {
+//            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
+//        }
+//
+//        UserChat userChat = UserChat.builder()
+//                .user(user)
+//                .chatroom(chatroom)
+//                .build();
+//
+//        userChatRepository.save(userChat);
+//
+//        return userChat.getChatroom().getId();
+//
+//    }
 
     // 전체 채팅방 조회
     @Override

@@ -1,5 +1,6 @@
 package com.example.EducationClassProject.dto.chatDTO;
 
+import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,5 +59,14 @@ public class ChatResponseDTO {
     @AllArgsConstructor
     public static class PreviewChatroomListDTO {
         List<PreviewChatroomDTO> previewChatroomDTOList;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ResultFindChatroom {
+        Chatroom chatroom;
+        User user;
     }
 }

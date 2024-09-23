@@ -84,24 +84,44 @@ public class ChatCommandServiceImpl implements ChatCommandService {
 
     }
 
+    // 채팅방 입장 ( 비밀번호 없는 채팅방 )
     @Override
-    public Long joinChatRoom(String token, Chatroom chatroom) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
-
-        if (isAlreadyJoin) {
-            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
-        }
+    @Transactional
+    public Long joinChatRoom(ChatResponseDTO.ResultFindChatroom resultFindChatroom) {
 
         UserChat userChat = UserChat.builder()
-                .user(user)
-                .chatroom(chatroom)
+                .user(resultFindChatroom.getUser())
+                .chatroom(resultFindChatroom.getChatroom())
                 .build();
 
         userChatRepository.save(userChat);
 
         return userChat.getChatroom().getId();
     }
+
+    // 채팅방 입장 ( 비밀번호 있는 채팅방 )
+    @Override
+    @Transactional
+    public Long joinSecretChatRoom(ChatResponseDTO.ResultFindChatroom resultFindChatroom, ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO) {
+
+        if (!resultFindChatroom.getChatroom().isSecret()) {
+            throw new ChatHandler(ErrorStatus._NOT_SECRET_ROOM);
+        }
+
+        if (!joinSecretChatroomDTO.getPassword().equals(resultFindChatroom.getChatroom().getPassword())) {
+            throw new ChatHandler(ErrorStatus._PASSWORD_ERROR);
+        }
+
+        UserChat userChat = UserChat.builder()
+                .user(resultFindChatroom.getUser())
+                .chatroom(resultFindChatroom.getChatroom())
+                .build();
+
+        userChatRepository.save(userChat);
+
+        return userChat.getChatroom().getId();
+
+    }
+
+
 }

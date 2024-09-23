@@ -9,6 +9,7 @@ import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ChatMessageRepository;
 import com.example.EducationClassProject.repository.ChatroomRepository;
+import com.example.EducationClassProject.repository.UserChatRepository;
 import com.example.EducationClassProject.service.ChatQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -25,6 +26,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final ChatMessageRepository chatMessageRepository;
     private final ChatroomRepository chatroomRepository;
+    private final UserChatRepository userChatRepository;
     private final JWTUtil jwtUtil;
 
     // 메세지 전송
@@ -66,12 +68,28 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .build();
     }
 
+    // 채팅방 찾아서 해당 채팅방에 유저 있는지 판별 후 유저와 채팅방 리턴
     @Override
-    public Chatroom findChatroom(Long roomId) {
+    @Transactional(readOnly = true)
+    public ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
         Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
             throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
         });
-        return chatroom;
+
+        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+
+        if (isAlreadyJoin) {
+            throw new ChatHandler(ErrorStatus._ALREADY_JOIN_USER);
+        }
+
+        return ChatResponseDTO.ResultFindChatroom.builder()
+                .chatroom(chatroom)
+                .user(user)
+                .build();
     }
 
 

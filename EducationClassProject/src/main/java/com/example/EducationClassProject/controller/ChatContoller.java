@@ -42,15 +42,16 @@ public class ChatContoller {
     // 채팅방 입장 ( 비밀번호 없는 채팅방 )
     @PostMapping("/chat/join/{roomId}")
     public BaseResponse<String> joinChatroom(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        Chatroom chatroom = chatQueryService.findChatroom(roomId);
-        Long joinRoomId = chatCommandService.joinChatRoom(token, chatroom);
+        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, token);
+        Long joinRoomId = chatCommandService.joinChatRoom(resultFindChatroom);
         return BaseResponse.onSuccess(joinRoomId + "번 방에 참여하셨습니다.");
     }
 
     // 채팅방 입장 ( 비밀번호 있는 채팅방 )
     @PostMapping("/chat/join/secret/{roomId}")
     public BaseResponse<String> joinSecretChatroom(@RequestBody ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, @PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        Long joinRoomId = chatService.joinSecretChatroom(joinSecretChatroomDTO, roomId, token);
+        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, token);
+        Long joinRoomId = chatCommandService.joinSecretChatRoom(resultFindChatroom, joinSecretChatroomDTO);
         return BaseResponse.onSuccess(joinRoomId + "번 방에 참여하셨습니다.");
     }
 

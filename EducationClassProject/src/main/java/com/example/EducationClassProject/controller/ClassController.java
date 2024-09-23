@@ -59,7 +59,8 @@ public class ClassController {
     // 강의 삭제 ( owner 만 허용 )
     @DeleteMapping("/delete/class/{classId}")
     public BaseResponse<String> deleteClass(@PathVariable Long classId, @RequestHeader("Authorization") String token) {
-        classService.deleteClass(classId, token);
+        Class aClass = classQueryService.getOwnerClass(classId, token);
+        classCommandService.deleteClass(aClass);
         return BaseResponse.onSuccess("삭제 되었습니다.");
     }
 

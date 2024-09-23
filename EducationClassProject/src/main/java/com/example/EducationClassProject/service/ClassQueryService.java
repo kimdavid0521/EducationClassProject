@@ -1,5 +1,6 @@
 package com.example.EducationClassProject.service;
 
+import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
 
 public interface ClassQueryService {
@@ -15,4 +16,7 @@ public interface ClassQueryService {
 
     // 모든 클래스 조회
     ClassResponseDTO.PreviewClassListResultDTO findAllClasses();
+
+    // 사용자가 owner 인지 검증 및 클래스 객체 반환
+    Class getOwnerClass(Long classId, String token);
 }

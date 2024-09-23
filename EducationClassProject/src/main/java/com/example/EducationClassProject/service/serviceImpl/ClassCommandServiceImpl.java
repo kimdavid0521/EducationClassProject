@@ -76,4 +76,11 @@ public class ClassCommandServiceImpl implements ClassCommandService {
         resultFindClass.getUser().updateUserPoint(currentPoint - 100);
         return resultFindClass.getAClass().getId();
     }
+
+    // 클래스 삭제
+    @Override
+    @Transactional
+    public void deleteClass(Class aClass) {
+        classRepository.delete(aClass);
+    }
 }

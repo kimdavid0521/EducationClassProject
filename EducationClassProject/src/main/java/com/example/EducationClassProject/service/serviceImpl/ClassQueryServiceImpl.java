@@ -128,4 +128,23 @@ public class ClassQueryServiceImpl implements ClassQueryService {
                 .build();
 
     }
+
+    // 사용자가 owner 인지 조회 및 클래스 객체 반환
+    @Override
+    @Transactional(readOnly = true)
+    public Class getOwnerClass(Long classId, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+        });
+
+        if (!classEntity.getOwner().getId().equals(user.getId())) {
+            throw new ClassHandler(ErrorStatus._NOT_CLASS_OWNER_DELETE);
+        }
+
+        return classEntity;
+    }
 }

@@ -168,23 +168,23 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // 클래스 삭제 (owner 만 가능)
-    @Override
-    @Transactional
-    public void deleteClass(Long classId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
-            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
-        });
-
-        if (!classEntity.getOwner().getId().equals(user.getId())) {
-            throw new ClassHandler(ErrorStatus._NOT_CLASS_OWNER_DELETE);
-        }
-
-        classRepository.delete(classEntity);
-    }
+//    @Override
+//    @Transactional
+//    public void deleteClass(Long classId, String token) {
+//
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+//            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+//        });
+//
+//        if (!classEntity.getOwner().getId().equals(user.getId())) {
+//            throw new ClassHandler(ErrorStatus._NOT_CLASS_OWNER_DELETE);
+//        }
+//
+//        classRepository.delete(classEntity);
+//    }
 
     // 클래스 업데이트
     @Override

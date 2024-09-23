@@ -26,7 +26,7 @@ public interface ClassService {
 //    ClassResponseDTO.PreviewClassListResultDTO findAllClasses();
 
     // 클래스 삭제
-    void deleteClass(Long classId, String token);
+//    void deleteClass(Long classId, String token);
 
     // 클래스 정보 업데이트
     ClassResponseDTO.PreviewClassResultDTO updateClass(Long classId, String token, ClassRequestDTO.UpdateClassDTO updateClassDTO);

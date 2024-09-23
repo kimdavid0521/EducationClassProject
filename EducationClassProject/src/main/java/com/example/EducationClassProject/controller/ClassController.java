@@ -67,7 +67,8 @@ public class ClassController {
     // 강의 정보 수정 ( owner 만 허용 )
     @PatchMapping("/class/{classId}")
     public BaseResponse<ClassResponseDTO.PreviewClassResultDTO> updateClass(@PathVariable Long classId, @RequestBody ClassRequestDTO.UpdateClassDTO updateClassDTO, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(classService.updateClass(classId, token, updateClassDTO));
+        Class aClass = classQueryService.getOwnerClass(classId, token);
+        return BaseResponse.onSuccess(classCommandService.updateClass(aClass, updateClassDTO));
     }
 
 

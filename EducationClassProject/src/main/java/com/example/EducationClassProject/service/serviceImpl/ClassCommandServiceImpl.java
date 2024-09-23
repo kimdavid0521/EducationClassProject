@@ -83,4 +83,12 @@ public class ClassCommandServiceImpl implements ClassCommandService {
     public void deleteClass(Class aClass) {
         classRepository.delete(aClass);
     }
+
+    // 클래스 정보 업데이트
+    @Override
+    @Transactional
+    public ClassResponseDTO.PreviewClassResultDTO updateClass(Class aClass, ClassRequestDTO.UpdateClassDTO updateClassDTO) {
+        aClass.updateClass(updateClassDTO); // 더티 체킹을 통한 업데이트
+        return new ClassResponseDTO.PreviewClassResultDTO(aClass.getId(), aClass.getClassName(), aClass.getClassIntro(), aClass.getClassExplain(), aClass.getClassLevel());
+    }
 }

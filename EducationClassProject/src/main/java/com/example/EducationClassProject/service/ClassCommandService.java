@@ -14,4 +14,7 @@ public interface ClassCommandService {
 
     // 클래스 삭제
     void deleteClass(Class aClass);
+
+    // 클래스 정보 업데이트
+    ClassResponseDTO.PreviewClassResultDTO updateClass(Class aClass, ClassRequestDTO.UpdateClassDTO updateClassDTO);
 }

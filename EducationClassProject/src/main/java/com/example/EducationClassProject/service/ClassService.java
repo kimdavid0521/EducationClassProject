@@ -29,5 +29,5 @@ public interface ClassService {
 //    void deleteClass(Long classId, String token);
 
     // 클래스 정보 업데이트
-    ClassResponseDTO.PreviewClassResultDTO updateClass(Long classId, String token, ClassRequestDTO.UpdateClassDTO updateClassDTO);
+//    ClassResponseDTO.PreviewClassResultDTO updateClass(Long classId, String token, ClassRequestDTO.UpdateClassDTO updateClassDTO);
 }

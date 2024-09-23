@@ -187,22 +187,22 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // 클래스 업데이트
-    @Override
-    @Transactional
-    public ClassResponseDTO.PreviewClassResultDTO updateClass(Long classId, String token, ClassRequestDTO.UpdateClassDTO updateClassDTO) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
-            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
-        });
-
-        if (!classEntity.getOwner().getId().equals(user.getId())) {
-            throw new ClassHandler(ErrorStatus._NOT_CLASS_OWNER);
-        }
-
-        classEntity.updateClass(updateClassDTO); // 더티 체킹을 통한 업데이트
-        return new ClassResponseDTO.PreviewClassResultDTO(classEntity.getId(), classEntity.getClassName(), classEntity.getClassIntro(), classEntity.getClassExplain(), classEntity.getClassLevel());
-    }
+//    @Override
+//    @Transactional
+//    public ClassResponseDTO.PreviewClassResultDTO updateClass(Long classId, String token, ClassRequestDTO.UpdateClassDTO updateClassDTO) {
+//
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
+//            throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
+//        });
+//
+//        if (!classEntity.getOwner().getId().equals(user.getId())) {
+//            throw new ClassHandler(ErrorStatus._NOT_CLASS_OWNER);
+//        }
+//
+//        classEntity.updateClass(updateClassDTO); // 더티 체킹을 통한 업데이트
+//        return new ClassResponseDTO.PreviewClassResultDTO(classEntity.getId(), classEntity.getClassName(), classEntity.getClassIntro(), classEntity.getClassExplain(), classEntity.getClassLevel());
+//    }
 }

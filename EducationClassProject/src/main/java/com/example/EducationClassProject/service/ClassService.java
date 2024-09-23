@@ -11,7 +11,7 @@ public interface ClassService {
 
 
     // 클래스 생성
-    ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, String token);
+//    ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, String token);
 
     // class 참여 요청 보내기
     Long joinClass(Long classId, String token);

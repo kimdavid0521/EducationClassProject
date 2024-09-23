@@ -33,40 +33,40 @@ public class ClassServiceImpl implements ClassService {
     private final JWTUtil jwtUtil;
 
     // 클래스 생성
-    @Override
-    @Transactional
-    public ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, String token) {
-
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-        if (user.getVerify().equals(Verify.FALSE)) {
-            throw new ClassHandler(ErrorStatus._NOT_VERIFY_CLASS);
-        }
-
-        // 잔여 포인트 검증
-        int currentPoint =  user.getPoint();
-        if (currentPoint < 200) {
-            throw new ClassHandler(ErrorStatus._MAKE_POINT_NOT_ENOUGH);
-        }
-
-        Class classEntity = Class.builder()
-                .className(createClassDTO.getClassName())
-                .classIntro(createClassDTO.getClassIntro())
-                .classExplain(createClassDTO.getClassExplain())
-                .classLevel(createClassDTO.getClassLevel())
-                .classDay(createClassDTO.getClassDay())
-                .classStartDay(createClassDTO.getClassStartDay())
-                .classTest(createClassDTO.getClassTest())
-                .owner(user)
-                .build();
-
-        classRepository.save(classEntity);
-
-        // 포인트 차감
-        user.updateUserPoint(currentPoint - 200);
-
-        return new ClassResponseDTO.CreateClassResultDTO(classEntity.getId(), classEntity.getClassName(), classEntity.getClassIntro());
-    }
+//    @Override
+//    @Transactional
+//    public ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, String token) {
+//
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//        if (user.getVerify().equals(Verify.FALSE)) {
+//            throw new ClassHandler(ErrorStatus._NOT_VERIFY_CLASS);
+//        }
+//
+//        // 잔여 포인트 검증
+//        int currentPoint =  user.getPoint();
+//        if (currentPoint < 200) {
+//            throw new ClassHandler(ErrorStatus._MAKE_POINT_NOT_ENOUGH);
+//        }
+//
+//        Class classEntity = Class.builder()
+//                .className(createClassDTO.getClassName())
+//                .classIntro(createClassDTO.getClassIntro())
+//                .classExplain(createClassDTO.getClassExplain())
+//                .classLevel(createClassDTO.getClassLevel())
+//                .classDay(createClassDTO.getClassDay())
+//                .classStartDay(createClassDTO.getClassStartDay())
+//                .classTest(createClassDTO.getClassTest())
+//                .owner(user)
+//                .build();
+//
+//        classRepository.save(classEntity);
+//
+//        // 포인트 차감
+//        user.updateUserPoint(currentPoint - 200);
+//
+//        return new ClassResponseDTO.CreateClassResultDTO(classEntity.getId(), classEntity.getClassName(), classEntity.getClassIntro());
+//    }
 
     // class 참여 요청 보내기
     @Override

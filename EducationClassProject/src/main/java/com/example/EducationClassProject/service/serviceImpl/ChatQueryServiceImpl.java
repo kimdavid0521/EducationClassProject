@@ -5,6 +5,7 @@ import com.example.EducationClassProject.apiPayload.exception.handler.ChatHandle
 import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
+import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ChatMessageRepository;
@@ -68,6 +69,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .build();
     }
 
+
     // 채팅방 찾아서 해당 채팅방에 유저 있는지 판별 후 유저와 채팅방 리턴
     @Override
     @Transactional(readOnly = true)
@@ -90,6 +92,30 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .chatroom(chatroom)
                 .user(user)
                 .build();
+    }
+
+    // 채팅방 조회 후 존재하는지 판별 (채팅방 나가기)
+    @Override
+    @Transactional(readOnly = true)
+    public UserChat findUserChatForOut(Long roomId, String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
+            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
+        });
+
+        boolean isAlreadyJoin = userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+
+        if (!isAlreadyJoin) {
+            throw new ChatHandler(ErrorStatus._NOT_CHATROOM_MEMBER);
+        }
+
+        UserChat userChat = userChatRepository.findByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+
+        return userChat;
+
     }
 
     // 전체 재팅방 조회
@@ -117,6 +143,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
     // 사용자가 참여하고있는 채팅방 조회
     @Override
+    @Transactional(readOnly = true)
     public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token) {
         String AccessToken = token.replace("Bearer ","");
         User user = jwtUtil.getUserFromToken(AccessToken);

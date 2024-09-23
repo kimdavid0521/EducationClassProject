@@ -123,5 +123,15 @@ public class ChatCommandServiceImpl implements ChatCommandService {
 
     }
 
+    // 채팅방 나가기
+    @Override
+    @Transactional
+    public String outChatroom(UserChat userChat) {
+
+        userChatRepository.delete(userChat);
+
+        return "방에서 나갔습니다.";
+    }
+
 
 }

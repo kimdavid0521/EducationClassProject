@@ -27,5 +27,5 @@ public interface ChatService {
 //    ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token);
 
     // 채팅방 나가기
-    String outChatroom(Long roomId, String token);
+//    String outChatroom(Long roomId, String token);
 }

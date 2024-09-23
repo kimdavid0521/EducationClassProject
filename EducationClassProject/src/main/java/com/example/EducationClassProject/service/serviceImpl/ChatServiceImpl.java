@@ -228,23 +228,23 @@ public class ChatServiceImpl implements ChatService {
 //    }
 
     // 채팅방 나가기
-    @Override
-    public String outChatroom(Long roomId, String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
-            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
-        });
-
-        if (!userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId())) {
-            throw new ChatHandler(ErrorStatus._NOT_CHATROOM_MEMBER);
-        }
-
-        UserChat userChat = userChatRepository.findByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
-
-        userChatRepository.delete(userChat);
-
-        return "방에서 나갔습니다.";
-    }
+//    @Override
+//    public String outChatroom(Long roomId, String token) {
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
+//            throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
+//        });
+//
+//        if (!userChatRepository.existsByUser_IdAndChatroom_Id(user.getId(), chatroom.getId())) {
+//            throw new ChatHandler(ErrorStatus._NOT_CHATROOM_MEMBER);
+//        }
+//
+//        UserChat userChat = userChatRepository.findByUser_IdAndChatroom_Id(user.getId(), chatroom.getId());
+//
+//        userChatRepository.delete(userChat);
+//
+//        return "방에서 나갔습니다.";
+//    }
 }

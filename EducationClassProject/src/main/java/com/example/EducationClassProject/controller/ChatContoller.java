@@ -3,6 +3,7 @@ package com.example.EducationClassProject.controller;
 import com.example.EducationClassProject.apiPayload.BaseResponse;
 import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.Chatroom;
+import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.service.ChatCommandService;
@@ -70,7 +71,8 @@ public class ChatContoller {
     // 채팅방 나가기
     @PostMapping("/chatroom/out/{roomId}")
     public BaseResponse<String> outChatroom(@PathVariable Long roomId, String token) {
-        return BaseResponse.onSuccess(chatService.outChatroom(roomId, token));
+        UserChat userChat = chatQueryService.findUserChatForOut(roomId, token);
+        return BaseResponse.onSuccess(chatCommandService.outChatroom(userChat));
     }
 
 

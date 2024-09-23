@@ -18,6 +18,7 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -33,6 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     // orderId로 결제 정보 조회
     @Override
+    @Transactional(readOnly = true)
     public PaymentResponseDTO.PaymentPreviewDTO previewPayment(Long orderId, String token) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> {
             throw new OrderHandler(ErrorStatus._NOT_FOUND_ORDER);
@@ -55,6 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     // 결제 검증
     @Override
+    @Transactional
     public IamportResponse<Payment> validationPayment(PaymentRequestDTO.CallBackDTO callBackDTO, String token) {
         // 외부 api 호출 실패를 대비하여 예외 처리를 통한 안정적인 검증 프로세스를 보장하기 위해 try - catch 문으로 구현하였습니다.
         try {

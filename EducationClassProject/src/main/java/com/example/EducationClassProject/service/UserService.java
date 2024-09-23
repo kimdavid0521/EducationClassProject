@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public interface UserService {
 
-    // 유저 회원 가입
-    UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO);
+//    // 유저 회원 가입
+//    UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO);
 
     // 유저 로그인
-    UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO);
+//    UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO);
 
     // 유저 조회
     UserResponseDTO.FindUserResultDTO findUser(String token);

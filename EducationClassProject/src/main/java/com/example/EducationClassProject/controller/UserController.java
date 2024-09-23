@@ -6,6 +6,8 @@ import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
+import com.example.EducationClassProject.service.UserCommandService;
+import com.example.EducationClassProject.service.UserQueryService;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +21,21 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final UserQueryService userQueryService;
+    private final UserCommandService userCommandService;
 
 
     // 유저 회원 가입
     // ( 유저 회원가입시 이벤트로 500포인트 증정되게 설정 )
     @PostMapping("/join/users")
     public BaseResponse<UserResponseDTO.JoinResultDTO> joinUser(@RequestBody UserRequestDTO.JoinDTO joinDTO) {
-        return BaseResponse.onSuccess(userService.joinUser(joinDTO)); // solid 원칙
+        return BaseResponse.onSuccess(userCommandService.joinUser(joinDTO)); // solid 원칙
     }
 
     // 유저 로그인
     @PostMapping("/login")
     public BaseResponse<UserResponseDTO.LoginResultDTO> loginUser(@RequestBody UserRequestDTO.LoginRequestDTO loginRequestDTO) {
-        return BaseResponse.onSuccess(userService.loginUser(loginRequestDTO)); // solid 원칙에 위배되지않게 service 단에서 모든 로직을 처리
+        return BaseResponse.onSuccess(userQueryService.loginUser(loginRequestDTO)); // solid 원칙에 위배되지않게 service 단에서 모든 로직을 처리
     }
 
     //유저 단건 조회

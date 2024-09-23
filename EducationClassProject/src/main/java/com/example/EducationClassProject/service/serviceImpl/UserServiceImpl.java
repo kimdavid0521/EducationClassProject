@@ -27,30 +27,30 @@ public class UserServiceImpl implements UserService {
     private final JWTUtil jwtUtil;
 
     // 회원가입
-    @Override
-    @Transactional  // 데이터 변경하는 메서드라 transactional 적용
-    public UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO) {
-        User user = UserConverter.toUser(joinDTO, passwordEncoder);
-        userRepository.save(user);
-        user.updateUserPoint(500); // 회원가입시 500 포인트 증정
-        return new UserResponseDTO.JoinResultDTO(user.getId(), user.getCreateAt());
-    }
+//    @Override
+//    @Transactional  // 데이터 변경하는 메서드라 transactional 적용
+//    public UserResponseDTO.JoinResultDTO joinUser(UserRequestDTO.JoinDTO joinDTO) {
+//        User user = UserConverter.toUser(joinDTO, passwordEncoder);
+//        userRepository.save(user);
+//        user.updateUserPoint(500); // 회원가입시 500 포인트 증정
+//        return new UserResponseDTO.JoinResultDTO(user.getId(), user.getCreateAt());
+//    }
 
     // 로그인
-    @Override
-    public UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO) {
-        User user = userRepository.findByEmail(loginRequestDTO.getEmail()).orElseThrow(() -> {
-            throw new UserHandler(ErrorStatus._NOT_FOUND_EMAIL);
-        });
-
-        if(!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
-            throw new UserHandler(ErrorStatus._PASSWORD_NOT_OK);
-        }
-
-        String token = jwtUtil.createAccessToken(user.getEmail(), user.getRole().toString());
-
-        return new UserResponseDTO.LoginResultDTO(user.getId(),token);
-    }
+//    @Override
+//    public UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO loginRequestDTO) {
+//        User user = userRepository.findByEmail(loginRequestDTO.getEmail()).orElseThrow(() -> {
+//            throw new UserHandler(ErrorStatus._NOT_FOUND_EMAIL);
+//        });
+//
+//        if(!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
+//            throw new UserHandler(ErrorStatus._PASSWORD_NOT_OK);
+//        }
+//
+//        String token = jwtUtil.createAccessToken(user.getEmail(), user.getRole().toString());
+//
+//        return new UserResponseDTO.LoginResultDTO(user.getId(),token);
+//    }
 
 
     // 유저 조회

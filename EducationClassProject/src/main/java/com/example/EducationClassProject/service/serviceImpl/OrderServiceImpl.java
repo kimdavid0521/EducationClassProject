@@ -14,6 +14,7 @@ import com.example.EducationClassProject.repository.PaymentRepository;
 import com.example.EducationClassProject.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 
     // 주문 번호 생성
     @Override
+    @Transactional
     public Long createOrder(OrderRequestDTO.CreateOrderDTO createOrderDTO, String token) {
 
         Product product = null;

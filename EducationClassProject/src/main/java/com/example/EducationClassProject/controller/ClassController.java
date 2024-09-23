@@ -47,7 +47,7 @@ public class ClassController {
     // 내가 생성한 class 조회하기 ( 선생 )
     @GetMapping("/class/owner")
     public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByOwner(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(classService.findClassesByOwner(token));
+        return BaseResponse.onSuccess(classQueryService.findClassesByOwner(token));
     }
 
     // class 전체 조회

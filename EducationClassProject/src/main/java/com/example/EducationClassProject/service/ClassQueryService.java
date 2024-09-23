@@ -9,4 +9,7 @@ public interface ClassQueryService {
 
     // 유저가 참여중인 클래스 조회
     ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(String token);
+
+    // 유저가 생성한 클래스 조회 ( 선생 )
+    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token);
 }

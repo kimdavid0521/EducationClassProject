@@ -123,30 +123,30 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // 내가 생성한 class 조회하기
-    @Override
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        if (user.getVerify().equals(Verify.FALSE)) {
-            throw new ClassHandler(ErrorStatus._NOT_TEACHER);
-        }
-
-        List<Class> classes = classRepository.findByOwnerId(user.getId());
-
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
-                .map(classEntity -> ClassResponseDTO.PreviewClassResultDTO.builder()
-                        .classId(classEntity.getId())
-                        .className(classEntity.getClassName())
-                        .classIntro(classEntity.getClassIntro())
-                        .classExplain(classEntity.getClassExplain())
-                        .classLevel(classEntity.getClassLevel())
-                        .build())
-                .collect(Collectors.toList());
-        return ClassResponseDTO.PreviewClassListResultDTO.builder()
-                .previewClassResultDTOList(classResultDTOList)
-                .build();
-    }
+//    @Override
+//    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token) {
+//        String AccessToken = token.replace("Bearer ","");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        if (user.getVerify().equals(Verify.FALSE)) {
+//            throw new ClassHandler(ErrorStatus._NOT_TEACHER);
+//        }
+//
+//        List<Class> classes = classRepository.findByOwnerId(user.getId());
+//
+//        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+//                .map(classEntity -> ClassResponseDTO.PreviewClassResultDTO.builder()
+//                        .classId(classEntity.getId())
+//                        .className(classEntity.getClassName())
+//                        .classIntro(classEntity.getClassIntro())
+//                        .classExplain(classEntity.getClassExplain())
+//                        .classLevel(classEntity.getClassLevel())
+//                        .build())
+//                .collect(Collectors.toList());
+//        return ClassResponseDTO.PreviewClassListResultDTO.builder()
+//                .previewClassResultDTOList(classResultDTOList)
+//                .build();
+//    }
 
     // 클래스 전체 조회
     @Override

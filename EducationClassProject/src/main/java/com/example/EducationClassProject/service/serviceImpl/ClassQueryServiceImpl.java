@@ -4,6 +4,7 @@ import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
 import com.example.EducationClassProject.apiPayload.exception.handler.ClassHandler;
 import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.domain.User;
+import com.example.EducationClassProject.domain.enums.Verify;
 import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ClassRepository;
@@ -73,6 +74,34 @@ public class ClassQueryServiceImpl implements ClassQueryService {
                         .build())
                 .collect(Collectors.toList());
 
+        return ClassResponseDTO.PreviewClassListResultDTO.builder()
+                .previewClassResultDTOList(classResultDTOList)
+                .build();
+    }
+
+    // 유저가 생성한 클래스 조회 ( 선생 )
+    @Override
+    @Transactional(readOnly = true)
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token) {
+
+        String AccessToken = token.replace("Bearer ","");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        if (user.getVerify().equals(Verify.FALSE)) {
+            throw new ClassHandler(ErrorStatus._NOT_TEACHER);
+        }
+
+        List<Class> classes = classRepository.findByOwnerId(user.getId());
+
+        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+                .map(classEntity -> ClassResponseDTO.PreviewClassResultDTO.builder()
+                        .classId(classEntity.getId())
+                        .className(classEntity.getClassName())
+                        .classIntro(classEntity.getClassIntro())
+                        .classExplain(classEntity.getClassExplain())
+                        .classLevel(classEntity.getClassLevel())
+                        .build())
+                .collect(Collectors.toList());
         return ClassResponseDTO.PreviewClassListResultDTO.builder()
                 .previewClassResultDTOList(classResultDTOList)
                 .build();

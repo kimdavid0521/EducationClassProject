@@ -20,7 +20,7 @@ public interface ClassService {
 //    ClassResponseDTO.PreviewClassListResultDTO findClassesByUserId(String token);
 
     // 내가 생성한 class 조회하기
-    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token);
+//    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token);
 
     // 클래스 전체 조회
     ClassResponseDTO.PreviewClassListResultDTO findAllClasses();

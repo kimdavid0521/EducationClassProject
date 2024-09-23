@@ -17,7 +17,7 @@ public interface ClassService {
 //    Long joinClass(Long classId, String token);
 
     // 유저 id로 클래스 객체 조회
-    ClassResponseDTO.PreviewClassListResultDTO findClassesByUserId(String token);
+//    ClassResponseDTO.PreviewClassListResultDTO findClassesByUserId(String token);
 
     // 내가 생성한 class 조회하기
     ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token);

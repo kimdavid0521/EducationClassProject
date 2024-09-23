@@ -26,7 +26,7 @@ public class ClassController {
     // ( class 생성시 200 포인트 차감 되게 설정 )
     @PostMapping("/class")
     public BaseResponse<ClassResponseDTO.CreateClassResultDTO> createClass(@RequestBody ClassRequestDTO.CreateClassDTO createClassDTO, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(classService.createClass(createClassDTO, token)); // solid 원칙
+        return BaseResponse.onSuccess(classCommandService.createClass(createClassDTO, token)); // solid 원칙
     }
 
     // class join 하기 ( 학생 )
@@ -41,7 +41,7 @@ public class ClassController {
     // 유저 id로 class 찾기
     @GetMapping("/class")
     public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByUser(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(classService.findClassesByUserId(token)); // solid 원칙
+        return BaseResponse.onSuccess(classQueryService.findClassesByUser(token)); // solid 원칙
     }
 
     // 내가 생성한 class 조회하기 ( 선생 )

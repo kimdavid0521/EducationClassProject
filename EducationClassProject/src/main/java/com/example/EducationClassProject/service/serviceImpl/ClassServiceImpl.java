@@ -101,26 +101,26 @@ public class ClassServiceImpl implements ClassService {
 //    }
 
     // 클래스 객체 유저 id로 조회화기
-    @Override
-    @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUserId(String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-        List<Class> classes = classRepository.findClassesByUserId(user.getId());
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
-                .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
-                        .classId(clas.getId())
-                        .className(clas.getClassName())
-                        .classIntro(clas.getClassIntro())
-                        .classExplain(clas.getClassExplain())
-                        .classLevel(clas.getClassLevel())
-                        .build())
-                .collect(Collectors.toList());
-
-        return ClassResponseDTO.PreviewClassListResultDTO.builder()
-                .previewClassResultDTOList(classResultDTOList)
-                .build();
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUserId(String token) {
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//        List<Class> classes = classRepository.findClassesByUserId(user.getId());
+//        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+//                .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
+//                        .classId(clas.getId())
+//                        .className(clas.getClassName())
+//                        .classIntro(clas.getClassIntro())
+//                        .classExplain(clas.getClassExplain())
+//                        .classLevel(clas.getClassLevel())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        return ClassResponseDTO.PreviewClassListResultDTO.builder()
+//                .previewClassResultDTOList(classResultDTOList)
+//                .build();
+//    }
 
     // 내가 생성한 class 조회하기
     @Override

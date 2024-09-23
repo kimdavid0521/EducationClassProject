@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ClassQueryServiceImpl implements ClassQueryService {
@@ -48,6 +51,30 @@ public class ClassQueryServiceImpl implements ClassQueryService {
         return ClassResponseDTO.ResultFindClass.builder()
                 .aClass(classEntity)
                 .user(user)
+                .build();
+    }
+
+    // 유저가 참여중인 클래스 조회
+    @Override
+    @Transactional(readOnly = true)
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(String token) {
+
+        String AccessToken = token.replace("Bearer ", "");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        List<Class> classes = classRepository.findClassesByUserId(user.getId());
+        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+                .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
+                        .classId(clas.getId())
+                        .className(clas.getClassName())
+                        .classIntro(clas.getClassIntro())
+                        .classExplain(clas.getClassExplain())
+                        .classLevel(clas.getClassLevel())
+                        .build())
+                .collect(Collectors.toList());
+
+        return ClassResponseDTO.PreviewClassListResultDTO.builder()
+                .previewClassResultDTOList(classResultDTOList)
                 .build();
     }
 }

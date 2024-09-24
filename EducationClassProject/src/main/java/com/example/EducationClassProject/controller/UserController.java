@@ -5,6 +5,7 @@ import com.example.EducationClassProject.converter.UserConverter;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
+import com.example.EducationClassProject.jwt.AuthUser;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.service.UserCommandService;
 import com.example.EducationClassProject.service.UserQueryService;
@@ -40,8 +41,8 @@ public class UserController {
 
     //유저 단건 조회
     @GetMapping("/find/user")
-    public BaseResponse<UserResponseDTO.FindUserResultDTO> findUser(@RequestHeader("Authorization") String token) {
-            return BaseResponse.onSuccess(userQueryService.findUser(token)); // solid 원칙
+    public BaseResponse<UserResponseDTO.FindUserResultDTO> findUser(@AuthUser User user) {
+            return BaseResponse.onSuccess(userQueryService.findUser(user)); // solid 원칙
     }
 
     // 유저 전체 조회
@@ -52,15 +53,15 @@ public class UserController {
 
     // 유저 삭제 ( 회원 탈퇴 )
     @DeleteMapping("/delete/user")
-    public BaseResponse<String> deleteUser(@RequestHeader("Authorization") String token) {
-        userCommandService.deleteUser(token);
+    public BaseResponse<String> deleteUser(@AuthUser User user) {
+        userCommandService.deleteUser(user);
         return BaseResponse.onSuccess("삭제되었습니다.");
     }
 
     // 유저 개인정보 업데이트
     @PatchMapping("/update/user") //개인정보 전체가 아닌 일부만 바뀌게 할 것이므로 patch 사용
-    public BaseResponse<UserResponseDTO.FindUserResultDTO> updateUserInfo(@RequestBody UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO, @RequestHeader("Authorization") String token) {
-    return BaseResponse.onSuccess(userCommandService.updateUserInfo(token, updateUserInfoDTO));
+    public BaseResponse<UserResponseDTO.FindUserResultDTO> updateUserInfo(@RequestBody UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO, @AuthUser User user) {
+    return BaseResponse.onSuccess(userCommandService.updateUserInfo(user, updateUserInfoDTO));
     }
 
 }

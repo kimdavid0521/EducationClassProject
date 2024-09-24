@@ -34,19 +34,14 @@ public class UserCommandServiceImpl implements UserCommandService {
     // 유저 회원 탈퇴
     @Override
     @Transactional
-    public void deleteUser(String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
     // 유저 개인정보 수정
     @Override
     @Transactional
-    public UserResponseDTO.FindUserResultDTO updateUserInfo(String token, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
-
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public UserResponseDTO.FindUserResultDTO updateUserInfo(User user, UserRequestDTO.UpdateUserInfoDTO updateUserInfoDTO) {
 
         user.updateUser(updateUserInfoDTO);  // 유저 엔티티에 작성해준 업데이트 함수 사용하여서 데이터 업데이트 (더티 체킹을 통한 업데이트 구현)
         return new UserResponseDTO.FindUserResultDTO(user.getId(),

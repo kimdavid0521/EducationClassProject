@@ -44,10 +44,7 @@ public class UserQueryServiceImpl implements UserQueryService {
     // 유저 개인 조회
     @Override
     @Transactional(readOnly = true)
-    public UserResponseDTO.FindUserResultDTO findUser(String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public UserResponseDTO.FindUserResultDTO findUser(User user) {
 
         return new UserResponseDTO.FindUserResultDTO(user.getId(),
                 user.getUsername(),

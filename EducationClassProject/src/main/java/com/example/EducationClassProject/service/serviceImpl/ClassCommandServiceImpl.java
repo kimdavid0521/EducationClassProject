@@ -27,9 +27,8 @@ public class ClassCommandServiceImpl implements ClassCommandService {
     // 클래스 생성
     @Override
     @Transactional
-    public ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ClassResponseDTO.CreateClassResultDTO createClass(ClassRequestDTO.CreateClassDTO createClassDTO, User user) {
+
         if (user.getVerify().equals(Verify.FALSE)) {
             throw new ClassHandler(ErrorStatus._NOT_VERIFY_CLASS);
         }

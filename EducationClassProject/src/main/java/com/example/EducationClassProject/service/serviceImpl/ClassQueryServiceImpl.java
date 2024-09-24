@@ -30,10 +30,7 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 클래스 조회 후 클래스 참여 여부 확인 ( 클래스 참여시 )
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.ResultFindClass findClass(Long classId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ClassResponseDTO.ResultFindClass findClass(Long classId, User user) {
 
         Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
             throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);
@@ -59,10 +56,7 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 유저가 참여중인 클래스 조회
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(String token) {
-
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user) {
 
         List<Class> classes = classRepository.findClassesByUserId(user.getId());
         List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
@@ -83,10 +77,7 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 유저가 생성한 클래스 조회 ( 선생 )
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user) {
 
         if (user.getVerify().equals(Verify.FALSE)) {
             throw new ClassHandler(ErrorStatus._NOT_TEACHER);
@@ -132,10 +123,7 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 사용자가 owner 인지 조회 및 클래스 객체 반환
     @Override
     @Transactional(readOnly = true)
-    public Class getOwnerClass(Long classId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public Class getOwnerClass(Long classId, User user) {
 
         Class classEntity = classRepository.findById(classId).orElseThrow(() -> {
             throw new ClassHandler(ErrorStatus._NOT_FOUND_CLASS);

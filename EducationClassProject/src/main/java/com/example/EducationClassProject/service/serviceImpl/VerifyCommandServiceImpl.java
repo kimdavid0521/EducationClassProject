@@ -31,4 +31,11 @@ public class VerifyCommandServiceImpl implements VerifyCommandService {
 
         return verifyCard;
     }
+
+    // 유저 검증서 수락하기 ( 관리자 페이지 )
+    @Override
+    @Transactional
+    public void acceptUserVerifyState(User user) {
+        user.updateVerify(); // 유저 검증 상태 업데이트
+    }
 }

@@ -47,8 +47,10 @@ public class VerifyCardController {
 
     // 인증서 수락 ( 관리자 페이지 )
     @PatchMapping("/verify/accept/{verifyCardId}")
-    public BaseResponse<VerifyResponseDTO.PreviewVerifyCardDTO> acceptVerify(@PathVariable Long verifyCardId) {
-        return BaseResponse.onSuccess(verifyService.acceptVerifyCard(verifyCardId));
+    public BaseResponse<String> acceptVerify(@PathVariable Long verifyCardId) {
+        User user = verifyQueryService.getVerifyCardUserForUpdate(verifyCardId);
+        verifyCommandService.acceptUserVerifyState(user);
+        return BaseResponse.onSuccess("해당 유저의 검증이 수락되었습니다.");
     }
 
 }

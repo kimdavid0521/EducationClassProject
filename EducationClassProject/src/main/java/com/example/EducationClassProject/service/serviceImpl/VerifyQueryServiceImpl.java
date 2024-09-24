@@ -100,4 +100,22 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
                 .previewVerifyCardDTOList(verifyCardDTOS)
                 .build();
     }
+
+    // 유저 검증 카드 조회 및 해당 유저 반환( 관리자 페이지에서 조회 후 상태 업데이트 해여하기에 cardId로 받았습니다. )
+    @Override
+    @Transactional(readOnly = true)
+    public User getVerifyCardUserForUpdate(Long verifyCardId) {
+
+        VerifyCard verifyCard = verifyCardRepository.findById(verifyCardId).orElseThrow(() -> {
+            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
+        });
+
+        User user = verifyCard.getUser();
+
+        if (user.getVerify() == Verify.TRUE) {
+            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
+        }
+
+        return user;
+    }
 }

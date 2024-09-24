@@ -19,6 +19,6 @@ public interface VerifyService {
 //    VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyCardList(Integer typeNum);
 
     // 검증서 수락하기 ( 관리자 페이지 )
-    VerifyResponseDTO.PreviewVerifyCardDTO acceptVerifyCard(Long verifyCardId);
+//    VerifyResponseDTO.PreviewVerifyCardDTO acceptVerifyCard(Long verifyCardId);
 
 }

@@ -115,27 +115,27 @@ public class VerifyServiceImpl implements VerifyService {
 //    }
 
     // 유저 검증 상태 업데이트
-    @Override
-    @Transactional
-    public VerifyResponseDTO.PreviewVerifyCardDTO acceptVerifyCard(Long verifyCardId) {
-        VerifyCard verifyCard = verifyCardRepository.findById(verifyCardId).orElseThrow(() -> {
-            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
-        });
-
-        User user = verifyCard.getUser();
-
-        if (user.getVerify() == Verify.TRUE) {
-            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
-        }
-
-        user.updateVerify(); // 유저 검증 상태 업데이트
-
-        return new VerifyResponseDTO.PreviewVerifyCardDTO(verifyCard.getUser().getUsername(),
-                verifyCard.getUser().getVerify(),
-                verifyCard.getId(),
-                verifyCard.getInfo(),
-                verifyCard.getGrade(),
-                verifyCard.getCareer(),
-                verifyCard.getLink());
-    }
+//    @Override
+//    @Transactional
+//    public VerifyResponseDTO.PreviewVerifyCardDTO acceptVerifyCard(Long verifyCardId) {
+//        VerifyCard verifyCard = verifyCardRepository.findById(verifyCardId).orElseThrow(() -> {
+//            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
+//        });
+//
+//        User user = verifyCard.getUser();
+//
+//        if (user.getVerify() == Verify.TRUE) {
+//            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
+//        }
+//
+//        user.updateVerify(); // 유저 검증 상태 업데이트
+//
+//        return new VerifyResponseDTO.PreviewVerifyCardDTO(verifyCard.getUser().getUsername(),
+//                verifyCard.getUser().getVerify(),
+//                verifyCard.getId(),
+//                verifyCard.getInfo(),
+//                verifyCard.getGrade(),
+//                verifyCard.getCareer(),
+//                verifyCard.getLink());
+//    }
 }

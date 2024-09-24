@@ -8,6 +8,7 @@ import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.global.PrincipalDetails;
+import com.example.EducationClassProject.jwt.AuthUser;
 import com.example.EducationClassProject.service.ChatCommandService;
 import com.example.EducationClassProject.service.ChatQueryService;
 import com.example.EducationClassProject.service.ChatService;
@@ -26,7 +27,7 @@ public class ChatContoller {
 
     // 메세지 전송 및 저장
     @MessageMapping("/chat/message")
-    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @AuthUser) {
         User user = principalDetails.getUser();
         ChatMessage chatMessage = chatCommandService.saveMessage(sendChatMessageDTO, user); // 메세지 저장
         return BaseResponse.onSuccess(chatQueryService.sendMessage(chatMessage));

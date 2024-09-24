@@ -4,6 +4,7 @@ import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
 import com.example.EducationClassProject.apiPayload.exception.handler.OrderHandler;
 import com.example.EducationClassProject.apiPayload.exception.handler.PaymentHandler;
 import com.example.EducationClassProject.domain.Order;
+import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.enums.PaymentState;
 import com.example.EducationClassProject.dto.PaymentDTO.PaymentRequestDTO;
 import com.example.EducationClassProject.dto.PaymentDTO.PaymentResponseDTO;
@@ -35,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
     // orderId로 결제 정보 조회
     @Override
     @Transactional(readOnly = true)
-    public PaymentResponseDTO.PaymentPreviewDTO previewPayment(Long orderId, String token) {
+    public PaymentResponseDTO.PaymentPreviewDTO previewPayment(Long orderId, User user) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> {
             throw new OrderHandler(ErrorStatus._NOT_FOUND_ORDER);
         });
@@ -58,7 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
     // 결제 검증
     @Override
     @Transactional
-    public IamportResponse<Payment> validationPayment(PaymentRequestDTO.CallBackDTO callBackDTO, String token) {
+    public IamportResponse<Payment> validationPayment(PaymentRequestDTO.CallBackDTO callBackDTO, User user) {
         // 외부 api 호출 실패를 대비하여 예외 처리를 통한 안정적인 검증 프로세스를 보장하기 위해 try - catch 문으로 구현하였습니다.
         try {
             // 결제 조회

@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     // 주문 번호 생성
     @Override
     @Transactional
-    public Long createOrder(OrderRequestDTO.CreateOrderDTO createOrderDTO, String token) {
+    public Long createOrder(OrderRequestDTO.CreateOrderDTO createOrderDTO, User user) {
 
         Product product = null;
         BigDecimal price = BigDecimal.valueOf(0);
@@ -50,9 +50,6 @@ public class OrderServiceImpl implements OrderService {
         } else {
             throw new OrderHandler(ErrorStatus._NOT_FOUND_PRODUCT);
         }
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
 
         Payment payment = Payment.builder()
                 .price(price)

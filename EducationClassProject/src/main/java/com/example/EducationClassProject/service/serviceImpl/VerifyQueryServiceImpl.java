@@ -2,8 +2,11 @@ package com.example.EducationClassProject.service.serviceImpl;
 
 import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
 import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
+import com.example.EducationClassProject.apiPayload.exception.handler.VerifyHandler;
 import com.example.EducationClassProject.domain.User;
+import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.domain.enums.Verify;
+import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.VerifyCardRepository;
 import com.example.EducationClassProject.service.VerifyQueryService;
@@ -37,5 +40,27 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
         }
 
         return user;
+    }
+
+    // 개인 검증서 조회
+    @Override
+    @Transactional(readOnly = true)
+    public VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token) {
+
+        String AccessToken = token.replace("Bearer ", "");
+        User user = jwtUtil.getUserFromToken(AccessToken);
+
+        VerifyCard verifyCard = user.getVerifyCard();
+        if (verifyCard == null) {
+            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
+        }
+
+        return new VerifyResponseDTO.PreviewVerifyCardDTO(verifyCard.getUser().getUsername(),
+                verifyCard.getUser().getVerify(),
+                verifyCard.getId(),
+                verifyCard.getInfo(),
+                verifyCard.getGrade(),
+                verifyCard.getCareer(),
+                verifyCard.getLink());
     }
 }

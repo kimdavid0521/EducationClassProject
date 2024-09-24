@@ -62,25 +62,25 @@ public class VerifyServiceImpl implements VerifyService {
 //    }
 
     // 개인 검증서 조회
-    @Override
-    @Transactional(readOnly = true)
-    public VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        VerifyCard verifyCard = user.getVerifyCard();
-        if (verifyCard == null) {
-            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
-        }
-
-        return new VerifyResponseDTO.PreviewVerifyCardDTO(verifyCard.getUser().getUsername(),
-                verifyCard.getUser().getVerify(),
-                verifyCard.getId(),
-                verifyCard.getInfo(),
-                verifyCard.getGrade(),
-                verifyCard.getCareer(),
-                verifyCard.getLink());
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token) {
+//        String AccessToken = token.replace("Bearer ", "");
+//        User user = jwtUtil.getUserFromToken(AccessToken);
+//
+//        VerifyCard verifyCard = user.getVerifyCard();
+//        if (verifyCard == null) {
+//            throw new VerifyHandler(ErrorStatus._NOT_FOUND_VERIFYCARD);
+//        }
+//
+//        return new VerifyResponseDTO.PreviewVerifyCardDTO(verifyCard.getUser().getUsername(),
+//                verifyCard.getUser().getVerify(),
+//                verifyCard.getId(),
+//                verifyCard.getInfo(),
+//                verifyCard.getGrade(),
+//                verifyCard.getCareer(),
+//                verifyCard.getLink());
+//    }
 
     // 검증 요청 내역 조회 ( 관리자 페이지 )
     @Override

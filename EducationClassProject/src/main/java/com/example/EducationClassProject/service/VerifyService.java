@@ -13,7 +13,7 @@ public interface VerifyService {
 //    VerifyCard applyVerify(String token, VerifyRequestDTO.ApplyVerifyDTO applyVerifyDTO);
 
     // 개인 검증서 조회
-    VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token);
+//    VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token);
 
     // 검증서 전체보기 ( 관리자 페이지 )
     VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyCardList(Integer typeNum);

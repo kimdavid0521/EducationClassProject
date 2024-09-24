@@ -35,7 +35,7 @@ public class VerifyCardController {
     // 개인 인증서 조회하기
     @GetMapping("/verifyCard")
     public BaseResponse<VerifyResponseDTO.PreviewVerifyCardDTO> previewVerifyCard(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(verifyService.previewVerifyCard(token));
+        return BaseResponse.onSuccess(verifyQueryService.previewVerifyCard(token));
     }
 
     // 인증서 내역 전체 조회 ( 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회 )

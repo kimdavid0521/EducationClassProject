@@ -144,9 +144,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 사용자가 참여하고있는 채팅방 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(String token) {
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user) {
 
         List<Chatroom> chatroomList = userChatRepository.findChatroomByUser_Id(user.getId());
         List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
@@ -163,6 +161,5 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .previewChatroomDTOList(chatroomDTOList)
                 .build();
     }
-
 
 }

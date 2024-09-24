@@ -3,14 +3,17 @@ package com.example.EducationClassProject.controller;
 import com.example.EducationClassProject.apiPayload.BaseResponse;
 import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.Chatroom;
+import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
+import com.example.EducationClassProject.global.PrincipalDetails;
 import com.example.EducationClassProject.service.ChatCommandService;
 import com.example.EducationClassProject.service.ChatQueryService;
 import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,15 +26,17 @@ public class ChatContoller {
 
     // 메세지 전송 및 저장
     @MessageMapping("/chat/message")
-    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @RequestHeader("Authorization") String token) {
-        ChatMessage chatMessage = chatCommandService.saveMessage(sendChatMessageDTO, token); // 메세지 저장
+    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User user = principalDetails.getUser();
+        ChatMessage chatMessage = chatCommandService.saveMessage(sendChatMessageDTO, user); // 메세지 저장
         return BaseResponse.onSuccess(chatQueryService.sendMessage(chatMessage));
     }
 
     // 채팅 기록 조회
     @GetMapping("/chat/{roomId}")
-    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, token));
+    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User user = principalDetails.getUser();
+        return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, user));
     }
 
     // 채팅방 생성
@@ -64,8 +69,9 @@ public class ChatContoller {
 
     // 사용자가 입장되어있는 채팅방 조회
     @GetMapping("/my/chatroom")
-    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(token));
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User user = principalDetails.getUser();
+        return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(user));
     }
 
     // 채팅방 나가기

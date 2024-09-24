@@ -29,10 +29,7 @@ public class ChatCommandServiceImpl implements ChatCommandService {
     // 메세지 저장
     @Override
     @Transactional
-    public ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, String token) {
-        // 유저 추출
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, User user) {
 
         // 채팅방 추출
         Long roomId = sendChatMessageDTO.getChatroomId();

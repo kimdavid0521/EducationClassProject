@@ -2,6 +2,7 @@ package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.Chatroom;
+import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
@@ -9,7 +10,7 @@ import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 public interface ChatCommandService {
 
     // 채팅 저장
-    ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, String token);
+    ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, User user);
 
     // 채팅방 생성
     ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);

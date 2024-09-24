@@ -41,7 +41,7 @@ public class VerifyCardController {
     // 인증서 내역 전체 조회 ( 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회 )
     @GetMapping("/verifyCard/{typeNum}")
     public BaseResponse<VerifyResponseDTO.PreviewVerifyCardListDTO> previewVerifyCardList(@PathVariable Integer typeNum) {
-        return BaseResponse.onSuccess(verifyService.previewVerifyCardList(typeNum));
+        return BaseResponse.onSuccess(verifyQueryService.previewVerifyRequestList(typeNum));
     }
 
 

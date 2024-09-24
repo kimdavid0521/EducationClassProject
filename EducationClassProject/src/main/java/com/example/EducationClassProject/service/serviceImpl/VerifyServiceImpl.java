@@ -83,36 +83,36 @@ public class VerifyServiceImpl implements VerifyService {
 //    }
 
     // 검증 요청 내역 조회 ( 관리자 페이지 )
-    @Override
-    @Transactional(readOnly = true)
-    public VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyCardList(Integer typeNum) {
-        List<VerifyCard> verifyCardList;
-        if (typeNum.equals(1)) {
-            verifyCardList = verifyCardRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 검증서 인증 요청 시간순으로 정렬
-        } else if (typeNum.equals(2)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"));
-        } else if (typeNum.equals(3)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"));
-        } else {
-            throw new VerifyHandler(ErrorStatus._BAD_REQUEST);
-        }
-
-        List<VerifyResponseDTO.PreviewVerifyCardDTO> verifyCardDTOS = verifyCardList.stream()
-                .map(card -> VerifyResponseDTO.PreviewVerifyCardDTO.builder()
-                        .username(card.getUser().getUsername())
-                        .isVerify(card.getUser().getVerify())
-                        .verifyCardId(card.getId())
-                        .info(card.getInfo())
-                        .grade(card.getGrade())
-                        .career(card.getCareer())
-                        .link(card.getLink())
-                        .build())
-                .collect(Collectors.toList());
-
-        return VerifyResponseDTO.PreviewVerifyCardListDTO.builder()
-                .previewVerifyCardDTOList(verifyCardDTOS)
-                .build();
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyCardList(Integer typeNum) {
+//        List<VerifyCard> verifyCardList;
+//        if (typeNum.equals(1)) {
+//            verifyCardList = verifyCardRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 검증서 인증 요청 시간순으로 정렬
+//        } else if (typeNum.equals(2)) {
+//            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"));
+//        } else if (typeNum.equals(3)) {
+//            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"));
+//        } else {
+//            throw new VerifyHandler(ErrorStatus._BAD_REQUEST);
+//        }
+//
+//        List<VerifyResponseDTO.PreviewVerifyCardDTO> verifyCardDTOS = verifyCardList.stream()
+//                .map(card -> VerifyResponseDTO.PreviewVerifyCardDTO.builder()
+//                        .username(card.getUser().getUsername())
+//                        .isVerify(card.getUser().getVerify())
+//                        .verifyCardId(card.getId())
+//                        .info(card.getInfo())
+//                        .grade(card.getGrade())
+//                        .career(card.getCareer())
+//                        .link(card.getLink())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        return VerifyResponseDTO.PreviewVerifyCardListDTO.builder()
+//                .previewVerifyCardDTOList(verifyCardDTOS)
+//                .build();
+//    }
 
     // 유저 검증 상태 업데이트
     @Override

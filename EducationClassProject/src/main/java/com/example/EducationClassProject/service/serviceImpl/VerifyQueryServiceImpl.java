@@ -11,8 +11,12 @@ import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.VerifyCardRepository;
 import com.example.EducationClassProject.service.VerifyQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,5 +66,38 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
                 verifyCard.getGrade(),
                 verifyCard.getCareer(),
                 verifyCard.getLink());
+    }
+
+    // 인증서 요청 리스트 조회 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회
+    @Override
+    @Transactional(readOnly = true)
+    public VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyRequestList(Integer typeNum) {
+
+        List<VerifyCard> verifyCardList;
+        if (typeNum.equals(1)) {
+            verifyCardList = verifyCardRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 검증서 인증 요청 시간순으로 정렬
+        } else if (typeNum.equals(2)) {
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"));
+        } else if (typeNum.equals(3)) {
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"));
+        } else {
+            throw new VerifyHandler(ErrorStatus._BAD_REQUEST);
+        }
+
+        List<VerifyResponseDTO.PreviewVerifyCardDTO> verifyCardDTOS = verifyCardList.stream()
+                .map(card -> VerifyResponseDTO.PreviewVerifyCardDTO.builder()
+                        .username(card.getUser().getUsername())
+                        .isVerify(card.getUser().getVerify())
+                        .verifyCardId(card.getId())
+                        .info(card.getInfo())
+                        .grade(card.getGrade())
+                        .career(card.getCareer())
+                        .link(card.getLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return VerifyResponseDTO.PreviewVerifyCardListDTO.builder()
+                .previewVerifyCardDTOList(verifyCardDTOS)
+                .build();
     }
 }

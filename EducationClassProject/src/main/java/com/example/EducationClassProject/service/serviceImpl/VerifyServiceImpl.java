@@ -30,36 +30,36 @@ public class VerifyServiceImpl implements VerifyService {
     private final JWTUtil jwtUtil;
 
     // 유저 선생 검증 요청
-    @Override
-    @Transactional
-    public VerifyCard applyVerify(String token, VerifyRequestDTO.ApplyVerifyDTO applyVerifyDTO) {
-
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
-
-        // 유저의 검증 상태 확인
-        if (user.getVerify() == Verify.TRUE) {
-            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
-        }
-
-        // verify 요청을 보낸적이 있는지 검증
-        boolean hasVerifyRequest = verifyCardRepository.existsVerifyCardByUserId(user.getId());
-        if (hasVerifyRequest) {
-            throw new UserHandler(ErrorStatus._ALREADY_REQUEST_VERIFY);
-        }
-
-        VerifyCard verifyCard = VerifyCard.builder()
-                .info(applyVerifyDTO.getInfo())
-                .grade(applyVerifyDTO.getGrade())
-                .career(applyVerifyDTO.getCareer())
-                .link(applyVerifyDTO.getLink())
-                .user(user)
-                .build();
-
-        verifyCardRepository.save(verifyCard);
-
-        return verifyCard;
-    }
+//    @Override
+//    @Transactional
+//    public VerifyCard applyVerify(String token, VerifyRequestDTO.ApplyVerifyDTO applyVerifyDTO) {
+//
+////        String AccessToken = token.replace("Bearer ", "");
+////        User user = jwtUtil.getUserFromToken(AccessToken);
+////
+////        // 유저의 검증 상태 확인
+////        if (user.getVerify() == Verify.TRUE) {
+////            throw new UserHandler(ErrorStatus._ALREADY_VERIFIED_USER);
+////        }
+////
+////        // verify 요청을 보낸적이 있는지 검증
+////        boolean hasVerifyRequest = verifyCardRepository.existsVerifyCardByUserId(user.getId());
+////        if (hasVerifyRequest) {
+////            throw new UserHandler(ErrorStatus._ALREADY_REQUEST_VERIFY);
+////        }
+//
+//        VerifyCard verifyCard = VerifyCard.builder()
+//                .info(applyVerifyDTO.getInfo())
+//                .grade(applyVerifyDTO.getGrade())
+//                .career(applyVerifyDTO.getCareer())
+//                .link(applyVerifyDTO.getLink())
+//                .user(user)
+//                .build();
+//
+//        verifyCardRepository.save(verifyCard);
+//
+//        return verifyCard;
+//    }
 
     // 개인 검증서 조회
     @Override

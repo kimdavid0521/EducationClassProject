@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface VerifyService {
 
     // 유저 선생 검증 요청 보내기
-    VerifyCard applyVerify(String token, VerifyRequestDTO.ApplyVerifyDTO applyVerifyDTO);
+//    VerifyCard applyVerify(String token, VerifyRequestDTO.ApplyVerifyDTO applyVerifyDTO);
 
     // 개인 검증서 조회
     VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token);

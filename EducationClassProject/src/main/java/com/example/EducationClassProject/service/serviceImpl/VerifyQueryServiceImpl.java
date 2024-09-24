@@ -28,9 +28,7 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
     // 유저 상태 검증 및 검증 요청 보낸적 있는지 확인
     @Override
     @Transactional(readOnly = true)
-    public User verifyUser(String token) {
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public User verifyUser(User user) {
 
         // 유저의 검증 상태 확인
         if (user.getVerify() == Verify.TRUE) {
@@ -49,10 +47,7 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
     // 개인 검증서 조회
     @Override
     @Transactional(readOnly = true)
-    public VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(String token) {
-
-        String AccessToken = token.replace("Bearer ", "");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(User user) {
 
         VerifyCard verifyCard = user.getVerifyCard();
         if (verifyCard == null) {

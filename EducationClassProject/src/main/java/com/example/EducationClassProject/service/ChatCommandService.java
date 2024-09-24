@@ -13,7 +13,7 @@ public interface ChatCommandService {
     ChatMessage saveMessage(ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, User user);
 
     // 채팅방 생성
-    ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token);
+    ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, User user);
 
     // 채팅방 입장
     Long joinChatRoom(ChatResponseDTO.ResultFindChatroom resultFindChatroom);

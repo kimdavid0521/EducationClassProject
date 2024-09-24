@@ -27,61 +27,56 @@ public class ChatContoller {
 
     // 메세지 전송 및 저장
     @MessageMapping("/chat/message")
-    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @AuthUser) {
-        User user = principalDetails.getUser();
+    public BaseResponse<ChatResponseDTO.ChatMessageResponseDTO> sendMessage(@RequestBody ChatRequestDTO.SendChatMessageDTO sendChatMessageDTO, @AuthUser User user) {
         ChatMessage chatMessage = chatCommandService.saveMessage(sendChatMessageDTO, user); // 메세지 저장
         return BaseResponse.onSuccess(chatQueryService.sendMessage(chatMessage));
     }
 
     // 채팅 기록 조회
     @GetMapping("/chat/{roomId}")
-    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        User user = principalDetails.getUser();
+    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @AuthUser User user) {
         return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, user));
     }
 
     // 채팅방 생성
     @PostMapping("/chat/chatroom")
-    public BaseResponse<ChatResponseDTO.MakeChatRoomResponseDTO> makeChatroom(@RequestBody ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, @RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatCommandService.makeChatRoom(makeChatroomRequestDTO, token));
+    public BaseResponse<ChatResponseDTO.MakeChatRoomResponseDTO> makeChatroom(@RequestBody ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, @AuthUser User user) {
+        return BaseResponse.onSuccess(chatCommandService.makeChatRoom(makeChatroomRequestDTO, user));
     }
 
     // 채팅방 입장 ( 비밀번호 없는 채팅방 )
     @PostMapping("/chat/join/{roomId}")
-    public BaseResponse<String> joinChatroom(@PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, token);
+    public BaseResponse<String> joinChatroom(@PathVariable Long roomId, @AuthUser User user) {
+        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, user);
         Long joinRoomId = chatCommandService.joinChatRoom(resultFindChatroom);
         return BaseResponse.onSuccess(joinRoomId + "번 방에 참여하셨습니다.");
     }
 
     // 채팅방 입장 ( 비밀번호 있는 채팅방 )
     @PostMapping("/chat/join/secret/{roomId}")
-    public BaseResponse<String> joinSecretChatroom(@RequestBody ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, @PathVariable Long roomId, @RequestHeader("Authorization") String token) {
-        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, token);
+    public BaseResponse<String> joinSecretChatroom(@RequestBody ChatRequestDTO.JoinSecretChatroomDTO joinSecretChatroomDTO, @PathVariable Long roomId, @AuthUser User user) {
+        ChatResponseDTO.ResultFindChatroom resultFindChatroom = chatQueryService.findChatroom(roomId, user);
         Long joinRoomId = chatCommandService.joinSecretChatRoom(resultFindChatroom, joinSecretChatroomDTO);
         return BaseResponse.onSuccess(joinRoomId + "번 방에 참여하셨습니다.");
     }
 
     // 전체 채팅방 조회
     @GetMapping("/all/chatroom")
-    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> getAllChatroom(@RequestHeader("Authorization") String token) {
-        return BaseResponse.onSuccess(chatQueryService.getAllChatroom(token));
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> getAllChatroom(@AuthUser User user) {
+        return BaseResponse.onSuccess(chatQueryService.getAllChatroom(user));
     }
 
     // 사용자가 입장되어있는 채팅방 조회
     @GetMapping("/my/chatroom")
-    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        User user = principalDetails.getUser();
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@AuthUser User user) {
         return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(user));
     }
 
     // 채팅방 나가기
     @PostMapping("/chatroom/out/{roomId}")
-    public BaseResponse<String> outChatroom(@PathVariable Long roomId, String token) {
-        UserChat userChat = chatQueryService.findUserChatForOut(roomId, token);
+    public BaseResponse<String> outChatroom(@PathVariable Long roomId, @AuthUser User user) {
+        UserChat userChat = chatQueryService.findUserChatForOut(roomId, user);
         return BaseResponse.onSuccess(chatCommandService.outChatroom(userChat));
     }
-
-
 
 }

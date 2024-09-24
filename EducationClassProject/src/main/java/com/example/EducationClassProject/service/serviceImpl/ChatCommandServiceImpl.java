@@ -51,10 +51,7 @@ public class ChatCommandServiceImpl implements ChatCommandService {
     // 채팅방 생성
     @Override
     @Transactional
-    public ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatResponseDTO.MakeChatRoomResponseDTO makeChatRoom(ChatRequestDTO.MakeChatroomRequestDTO makeChatroomRequestDTO, User user) {
 
         // 비밀번호 설정 검증
         if (makeChatroomRequestDTO.isSecret() && (makeChatroomRequestDTO.getPassword() == null || makeChatroomRequestDTO.getPassword().isEmpty())) {
@@ -77,8 +74,6 @@ public class ChatCommandServiceImpl implements ChatCommandService {
                 .isSecret(chatroom.isSecret())
                 .password(chatroom.getPassword())
                 .build();
-
-
     }
 
     // 채팅방 입장 ( 비밀번호 없는 채팅방 )

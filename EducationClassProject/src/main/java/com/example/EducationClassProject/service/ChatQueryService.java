@@ -12,16 +12,16 @@ public interface ChatQueryService {
     ChatResponseDTO.ChatMessageResponseDTO sendMessage(ChatMessage chatMessage);
 
     // 채팅 기록 조회
-    ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token);
+    ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user);
 
     // 채팅방 조회
-    ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, String token);
+    ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, User user);
 
     // 채팅방 조회 (채팅방 나가기)
-    UserChat findUserChatForOut(Long roomId, String token);
+    UserChat findUserChatForOut(Long roomId, User user);
 
     // 전체 채팅방 조회
-    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token);
+    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user);
 
     // 사용자가 참여하고있는 채팅방 조회
     ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user);

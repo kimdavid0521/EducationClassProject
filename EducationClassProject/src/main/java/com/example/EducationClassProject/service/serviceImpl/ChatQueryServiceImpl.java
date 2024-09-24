@@ -49,10 +49,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 채팅 기록 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user) {
 
         List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
         List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
@@ -73,10 +70,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 채팅방 찾아서 해당 채팅방에 유저 있는지 판별 후 유저와 채팅방 리턴
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, User user) {
 
         Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
             throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
@@ -97,10 +91,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 채팅방 조회 후 존재하는지 판별 (채팅방 나가기)
     @Override
     @Transactional(readOnly = true)
-    public UserChat findUserChatForOut(Long roomId, String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public UserChat findUserChatForOut(Long roomId, User user) {
 
         Chatroom chatroom = chatroomRepository.findById(roomId).orElseThrow(() -> {
             throw new ChatHandler(ErrorStatus._NOT_FOUND_CHATROOM);
@@ -121,10 +112,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 전체 재팅방 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(String token) {
-
-        String AccessToken = token.replace("Bearer ","");
-        User user = jwtUtil.getUserFromToken(AccessToken);
+    public ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user) {
 
         List<Chatroom> chatroomList = chatroomRepository.findAll();
         List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()

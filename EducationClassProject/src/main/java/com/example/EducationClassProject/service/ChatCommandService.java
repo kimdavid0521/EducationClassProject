@@ -1,7 +1,6 @@
 package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.ChatMessage;
-import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;

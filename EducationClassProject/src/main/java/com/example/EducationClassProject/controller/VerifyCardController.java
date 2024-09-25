@@ -1,7 +1,6 @@
 package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
-import com.example.EducationClassProject.converter.VerifyCardConverter;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.dto.verifyDTO.VerifyRequestDTO;
@@ -12,9 +11,6 @@ import com.example.EducationClassProject.service.VerifyQueryService;
 import com.example.EducationClassProject.service.VerifyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor

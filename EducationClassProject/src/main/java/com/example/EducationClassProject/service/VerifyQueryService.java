@@ -1,10 +1,7 @@
 package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
-
-import java.util.List;
 
 public interface VerifyQueryService {
 

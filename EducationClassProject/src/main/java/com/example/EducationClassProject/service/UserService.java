@@ -1,12 +1,5 @@
 package com.example.EducationClassProject.service;
 
-import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
-import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
-
-import java.util.List;
-import java.util.UUID;
-
 public interface UserService {
 
 //    // 유저 회원 가입

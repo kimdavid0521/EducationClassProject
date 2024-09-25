@@ -2,10 +2,7 @@ package com.example.EducationClassProject.dto.userDTO;
 
 import com.example.EducationClassProject.domain.enums.Gender;
 import com.example.EducationClassProject.domain.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
 public class UserRequestDTO {

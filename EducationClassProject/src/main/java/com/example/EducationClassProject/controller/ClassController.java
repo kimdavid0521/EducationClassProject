@@ -1,7 +1,6 @@
 package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
-import com.example.EducationClassProject.converter.ClassConverter;
 import com.example.EducationClassProject.domain.Class;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.classDTO.ClassRequestDTO;
@@ -10,9 +9,6 @@ import com.example.EducationClassProject.jwt.AuthUser;
 import com.example.EducationClassProject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor

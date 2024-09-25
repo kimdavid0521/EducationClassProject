@@ -1,11 +1,9 @@
 package com.example.EducationClassProject.converter;
 
-import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
 
 import java.util.List;
-import java.util.UUID;
 
 public class VerifyCardConverter {
 

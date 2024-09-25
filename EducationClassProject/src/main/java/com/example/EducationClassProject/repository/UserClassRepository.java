@@ -1,7 +1,5 @@
 package com.example.EducationClassProject.repository;
 
-import com.example.EducationClassProject.domain.Class;
-import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

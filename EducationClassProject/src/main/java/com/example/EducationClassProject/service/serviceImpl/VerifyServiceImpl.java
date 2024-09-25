@@ -1,25 +1,11 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
-import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
-import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
-import com.example.EducationClassProject.apiPayload.exception.handler.VerifyHandler;
-import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.domain.VerifyCard;
-import com.example.EducationClassProject.domain.enums.Verify;
-import com.example.EducationClassProject.dto.verifyDTO.VerifyRequestDTO;
-import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.repository.VerifyCardRepository;
 import com.example.EducationClassProject.service.VerifyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

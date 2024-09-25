@@ -1,12 +1,5 @@
 package com.example.EducationClassProject.service;
 
-import com.example.EducationClassProject.domain.VerifyCard;
-import com.example.EducationClassProject.dto.verifyDTO.VerifyRequestDTO;
-import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
-
-import java.util.List;
-import java.util.UUID;
-
 public interface VerifyService {
 
     // 유저 선생 검증 요청 보내기

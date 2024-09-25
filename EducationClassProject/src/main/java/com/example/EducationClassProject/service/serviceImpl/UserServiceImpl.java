@@ -1,22 +1,11 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
-import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
-import com.example.EducationClassProject.apiPayload.exception.handler.UserHandler;
-import com.example.EducationClassProject.converter.UserConverter;
-import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
-import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

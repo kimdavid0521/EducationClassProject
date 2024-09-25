@@ -1,13 +1,5 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
-import com.example.EducationClassProject.apiPayload.code.status.ErrorStatus;
-import com.example.EducationClassProject.apiPayload.exception.handler.ChatHandler;
-import com.example.EducationClassProject.domain.ChatMessage;
-import com.example.EducationClassProject.domain.Chatroom;
-import com.example.EducationClassProject.domain.User;
-import com.example.EducationClassProject.domain.mapping.UserChat;
-import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
-import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
 import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.ChatMessageRepository;
 import com.example.EducationClassProject.repository.ChatroomRepository;
@@ -16,9 +8,6 @@ import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

@@ -1,12 +1,5 @@
 package com.example.EducationClassProject.service;
 
-import com.example.EducationClassProject.domain.Class;
-import com.example.EducationClassProject.dto.classDTO.ClassRequestDTO;
-import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
-
-import java.util.List;
-import java.util.UUID;
-
 public interface ClassService {
 
 

@@ -2,19 +2,16 @@ package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
 import com.example.EducationClassProject.domain.ChatMessage;
-import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatRequestDTO;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
-import com.example.EducationClassProject.global.PrincipalDetails;
 import com.example.EducationClassProject.jwt.AuthUser;
 import com.example.EducationClassProject.service.ChatCommandService;
 import com.example.EducationClassProject.service.ChatQueryService;
 import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

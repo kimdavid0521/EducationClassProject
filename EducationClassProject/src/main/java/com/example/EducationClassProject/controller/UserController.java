@@ -1,20 +1,15 @@
 package com.example.EducationClassProject.controller;
 
 import com.example.EducationClassProject.apiPayload.BaseResponse;
-import com.example.EducationClassProject.converter.UserConverter;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
 import com.example.EducationClassProject.jwt.AuthUser;
-import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.service.UserCommandService;
 import com.example.EducationClassProject.service.UserQueryService;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor

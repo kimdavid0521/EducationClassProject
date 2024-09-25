@@ -31,23 +31,23 @@ jobs:
     #Setting yml
     - name: Convert to dev YML
       run: |
-        if [ -e "./EducationClassProject/src/main/resources/application.yml" ]; then rm ./EducationClassProject/src/main/resources/application.yml; fi
-        echo "${{ secrets.APPLICATION_SECRET }}" > ./EducationClassProject/src/main/resources/application.yml
+        if [ -e "./educationClassProject/src/main/resources/application.yml" ]; then rm ./educationClassProject/src/main/resources/application.yml; fi
+        echo "${{ secrets.APPLICATION_SECRET }}" > ./educationClassProject/src/main/resources/application.yml
         
     #gradlew chmod
     - name: Grant execute permission for gradlew 
-      run: chmod +x ./EducationClassProject/gradlew
+      run: chmod +x ./educationClassProject/gradlew
       
     # Spring Boot Build
     - name: Spring Boot Build
-      working-directory: ./EducationClassProject  # 작업 디렉토리 설정
+      working-directory: ./educationClassProject # 작업 디렉토리 설정
       run: ./gradlew clean build -x test
 
 
 #----------------- Docker --------
 
     - name: Docker Image Build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGENAME }} -f ./EducationClassProject/Dockerfile ./EducationClassProject
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGENAME }} -f ./educationClassProject/Dockerfile ./educationClassProject
       
     # DockerHub Login
     - name: Docker Hub Login

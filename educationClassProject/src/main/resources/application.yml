@@ -2,7 +2,7 @@ spring:
   datasource:
     username: ${username}
     password: ${password}
-    url: jdbc:mysql://davideducation.cb8kekey60qs.ap-northeast-2.rds.amazonaws.com/DavidEducationDATABASE?useSSL=false&serverTimezone=Asia/Seoul@characterEncoding=UTF-8
+    url: jdbc:mysql://davideducation.cb8kekey60qs.ap-northeast-2.rds.amazonaws.com:3306/DavidEducationDATABASE?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     properties:

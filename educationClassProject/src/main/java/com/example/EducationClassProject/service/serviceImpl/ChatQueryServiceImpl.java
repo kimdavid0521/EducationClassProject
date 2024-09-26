@@ -51,7 +51,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     @Transactional(readOnly = true)
     public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user) {
 
-        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreatedAtDesc(roomId);
+        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreateAtDesc(roomId);
         List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
                 .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
                         .chatId(chatMessage.getId())

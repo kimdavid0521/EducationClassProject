@@ -10,5 +10,5 @@ import java.util.List;
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 
     // 채팅방 id로 모든 메세지 찾기 (촤신순)
-    List<ChatMessage> findByChatroom_IdOrderByCreatedAtDesc(Long chatroomId);
+    List<ChatMessage> findByChatroom_IdOrderByCreateAtDesc(Long chatroomId);
 }

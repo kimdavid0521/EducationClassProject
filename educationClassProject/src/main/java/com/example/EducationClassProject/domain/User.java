@@ -61,6 +61,7 @@ public class User extends BaseEntity{
 
     // 한 선생계정으로 여러 강의를 생성 할 수 있음.
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Class> ownedClasses = new ArrayList<>();
 
 

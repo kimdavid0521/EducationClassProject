@@ -32,7 +32,7 @@ jobs:
     - name: Convert to dev YML
       run: |
         if [ -e "./educationClassProject/src/main/resources/application.yml" ]; then rm ./educationClassProject/src/main/resources/application.yml; fi
-        echo "${{ secrets.APPLICATION_SECRET }}" > ./educationClassProject/src/main/resources/application.yml
+        echo "${{ secrets.APPLICATION_YML }}" > ./educationClassProject/src/main/resources/application.yml
         
     #gradlew chmod
     - name: Grant execute permission for gradlew 

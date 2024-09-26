@@ -1,7 +1,7 @@
 spring:
   datasource:
-    username: ${username}
-    password: ${password}
+    username: admin
+    password: glory76tymj1!
     url: jdbc:mysql://davideducation.cb8kekey60qs.ap-northeast-2.rds.amazonaws.com:3306/DavidEducationDATABASE?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -17,5 +17,5 @@ spring:
     access-token-time: 3600000
 
 iamport:
-  api_key: ${iamport_Rest_Api_Key}
-  api_secret: ${iamport_Rest_Api_Secret}
+  api_key: 5600634168535380
+  api_secret: MXd3JPiJFofIMeDatBlHJdKtEIR8PiyX91hvp4icZUoGuP6ck09yMTEYasNXpNtChfSxHudCECljOpzN

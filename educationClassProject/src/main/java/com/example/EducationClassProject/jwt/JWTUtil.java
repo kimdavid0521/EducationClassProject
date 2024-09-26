@@ -23,12 +23,9 @@ public class JWTUtil {
     private final UserRepository userRepository;
 
 
-    public JWTUtil(
-            @Value("${spring.jwt.secret}") final String secretKey,
-            @Value("${spring.jwt.access-token-time}") final long accessTokenValidityMilliseconds,
-            UserRepository userRepository) {
-        this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        this.accessTokenValidityMilliseconds = accessTokenValidityMilliseconds;
+    public JWTUtil(UserRepository userRepository) {
+        this.secretKey = Keys.hmacShaKeyFor("Epjma2vvW+NPGurRKItFl9f6QMokFo/HwEArhEQS+U4=".getBytes(StandardCharsets.UTF_8));
+        this.accessTokenValidityMilliseconds = 3600000L; // 예시로 1시간 설정
         this.userRepository = userRepository;
     }
 

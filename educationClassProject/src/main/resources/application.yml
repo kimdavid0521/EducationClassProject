@@ -13,7 +13,7 @@ spring:
         hbm2ddl:
           auto: update
   jwt:
-    secret: Epjma2vvW+NPGurRKItFl9f6QMokFo/HwEArhEQS+U4=
+    secret: "Epjma2vvW+NPGurRKItFl9f6QMokFo/HwEArhEQS+U4="
     access-token-time: 3600000
 
 iamport:

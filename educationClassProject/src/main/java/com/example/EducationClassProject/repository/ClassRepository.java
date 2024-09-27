@@ -1,6 +1,9 @@
 package com.example.EducationClassProject.repository;
 
 import com.example.EducationClassProject.domain.Class;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +20,7 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
 
     // 자신이 생성한 강의만 조회
     List<Class> findByOwnerId(UUID ownerId);
+
+    // 강의 목록 전체 조회 페이지 네이션
+    Page<Class> findAllPage(Pageable pageable);
 }

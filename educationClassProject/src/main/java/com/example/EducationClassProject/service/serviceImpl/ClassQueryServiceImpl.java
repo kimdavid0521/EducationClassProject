@@ -11,6 +11,8 @@ import com.example.EducationClassProject.repository.ClassRepository;
 import com.example.EducationClassProject.repository.UserClassRepository;
 import com.example.EducationClassProject.service.ClassQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,10 +104,10 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 모든 클래스 조회
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findAllClasses() {
+    public ClassResponseDTO.PreviewClassListResultDTO findAllClasses(Pageable pageable) {
 
-        List<Class> classes = classRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 클래스 생성된 날짜 순으로 가져오기
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+        Page<Class> classPage = classRepository.findAllPage(pageable);
+        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classPage.stream()
                 .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
                         .classId(clas.getId())
                         .className(clas.getClassName())
@@ -114,8 +116,13 @@ public class ClassQueryServiceImpl implements ClassQueryService {
                         .classLevel(clas.getClassLevel())
                         .build())
                 .collect(Collectors.toList());
+
         return ClassResponseDTO.PreviewClassListResultDTO.builder()
                 .previewClassResultDTOList(classResultDTOList)
+                .totalPages(classPage.getTotalPages())
+                .totalElements(classPage.getTotalElements())
+                .currentPage(classPage.getNumber())
+                .pageSize(classPage.getSize())
                 .build();
 
     }

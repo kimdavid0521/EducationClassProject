@@ -8,6 +8,8 @@ import com.example.EducationClassProject.dto.classDTO.ClassResponseDTO;
 import com.example.EducationClassProject.jwt.AuthUser;
 import com.example.EducationClassProject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -50,8 +52,12 @@ public class ClassController {
 
     // class 전체 조회
     @GetMapping("/classes")
-    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findAllClasses() {
-        return BaseResponse.onSuccess(classQueryService.findAllClasses());
+    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findAllClasses(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(classQueryService.findAllClasses(pageable));
     }
 
     // 강의 삭제 ( owner 만 허용 )

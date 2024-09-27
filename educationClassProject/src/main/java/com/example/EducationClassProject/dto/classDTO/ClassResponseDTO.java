@@ -43,6 +43,10 @@ public class ClassResponseDTO {
     @Builder
     public static class PreviewClassListResultDTO {
         List<PreviewClassResultDTO> previewClassResultDTOList;
+        int totalPages; // 전체 페이지 수
+        long totalElements; // 전체 항목 수
+        int currentPage; // 현재 페이지 번호
+        int pageSize; // 페이지당 항목 수
     }
 
     @Getter

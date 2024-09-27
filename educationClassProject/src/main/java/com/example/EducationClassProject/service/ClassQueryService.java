@@ -14,7 +14,7 @@ public interface ClassQueryService {
     ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user);
 
     // 유저가 생성한 클래스 조회 ( 선생 )
-    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user);
+    ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user, Pageable pageable);
 
     // 모든 클래스 조회
     ClassResponseDTO.PreviewClassListResultDTO findAllClasses(Pageable pageable);

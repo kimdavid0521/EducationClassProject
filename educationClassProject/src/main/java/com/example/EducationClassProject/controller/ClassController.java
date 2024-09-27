@@ -46,8 +46,10 @@ public class ClassController {
 
     // 내가 생성한 class 조회하기 ( 선생 )
     @GetMapping("/class/owner")
-    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByOwner(@AuthUser User user) {
-        return BaseResponse.onSuccess(classQueryService.findClassesByOwner(user));
+    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByOwner(@AuthUser User user, @RequestParam(defaultValue = "0") int page,
+                                                                                       @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(classQueryService.findClassesByOwner(user, pageable));
     }
 
     // class 전체 조회

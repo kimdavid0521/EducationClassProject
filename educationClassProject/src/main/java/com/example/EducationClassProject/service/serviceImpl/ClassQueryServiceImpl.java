@@ -79,15 +79,15 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 유저가 생성한 클래스 조회 ( 선생 )
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user) {
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user, Pageable pageable) {
 
         if (user.getVerify().equals(Verify.FALSE)) {
             throw new ClassHandler(ErrorStatus._NOT_TEACHER);
         }
+        Page<Class> classPage = classRepository.findByOwnerId(user.getId(), pageable);
 
-        List<Class> classes = classRepository.findByOwnerId(user.getId());
 
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classPage.stream()
                 .map(classEntity -> ClassResponseDTO.PreviewClassResultDTO.builder()
                         .classId(classEntity.getId())
                         .className(classEntity.getClassName())
@@ -96,8 +96,13 @@ public class ClassQueryServiceImpl implements ClassQueryService {
                         .classLevel(classEntity.getClassLevel())
                         .build())
                 .collect(Collectors.toList());
+
         return ClassResponseDTO.PreviewClassListResultDTO.builder()
                 .previewClassResultDTOList(classResultDTOList)
+                .totalPages(classPage.getTotalPages())
+                .totalElements(classPage.getTotalElements())
+                .currentPage(classPage.getNumber())
+                .pageSize(classPage.getSize())
                 .build();
     }
 

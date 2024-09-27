@@ -19,7 +19,7 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
     List<Class> findClassesByUserId(UUID userId);
 
     // 자신이 생성한 강의만 조회
-    List<Class> findByOwnerId(UUID ownerId);
+    Page<Class> findByOwnerId(UUID ownerId, Pageable pageable);
 
     // 강의 목록 전체 조회 페이지 네이션
     Page<Class> findAllPage(Pageable pageable);

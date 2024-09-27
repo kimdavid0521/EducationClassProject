@@ -40,13 +40,17 @@ public class ClassController {
 
     // 유저 id로 class 찾기
     @GetMapping("/class")
-    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByUser(@AuthUser User user) {
-        return BaseResponse.onSuccess(classQueryService.findClassesByUser(user)); // solid 원칙
+    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByUser(@AuthUser User user,
+                                                                                      @RequestParam(defaultValue = "0") int page,
+                                                                                      @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(classQueryService.findClassesByUser(user, pageable)); // solid 원칙
     }
 
     // 내가 생성한 class 조회하기 ( 선생 )
     @GetMapping("/class/owner")
-    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByOwner(@AuthUser User user, @RequestParam(defaultValue = "0") int page,
+    public BaseResponse<ClassResponseDTO.PreviewClassListResultDTO> findClassesByOwner(@AuthUser User user,
+                                                                                       @RequestParam(defaultValue = "0") int page,
                                                                                        @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return BaseResponse.onSuccess(classQueryService.findClassesByOwner(user, pageable));

@@ -58,10 +58,11 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     // 유저가 참여중인 클래스 조회
     @Override
     @Transactional(readOnly = true)
-    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user) {
+    public ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user, Pageable pageable) {
 
-        List<Class> classes = classRepository.findClassesByUserId(user.getId());
-        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classes.stream()
+
+        Page<Class> classPage = classRepository.findClassesByUserId(user.getId(), pageable);
+        List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classPage.stream()
                 .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
                         .classId(clas.getId())
                         .className(clas.getClassName())
@@ -73,6 +74,10 @@ public class ClassQueryServiceImpl implements ClassQueryService {
 
         return ClassResponseDTO.PreviewClassListResultDTO.builder()
                 .previewClassResultDTOList(classResultDTOList)
+                .totalPages(classPage.getTotalPages())
+                .totalElements(classPage.getTotalElements())
+                .currentPage(classPage.getNumber())
+                .pageSize(classPage.getSize())
                 .build();
     }
 

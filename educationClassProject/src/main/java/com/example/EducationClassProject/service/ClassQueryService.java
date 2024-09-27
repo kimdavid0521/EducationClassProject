@@ -11,7 +11,7 @@ public interface ClassQueryService {
     ClassResponseDTO.ResultFindClass findClass(Long classId, User user);
 
     // 유저가 참여중인 클래스 조회
-    ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user);
+    ClassResponseDTO.PreviewClassListResultDTO findClassesByUser(User user, Pageable pageable);
 
     // 유저가 생성한 클래스 조회 ( 선생 )
     ClassResponseDTO.PreviewClassListResultDTO findClassesByOwner(User user, Pageable pageable);

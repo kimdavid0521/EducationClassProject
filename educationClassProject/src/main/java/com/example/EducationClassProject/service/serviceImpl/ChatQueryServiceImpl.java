@@ -13,6 +13,8 @@ import com.example.EducationClassProject.repository.ChatroomRepository;
 import com.example.EducationClassProject.repository.UserChatRepository;
 import com.example.EducationClassProject.service.ChatQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,9 +51,9 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 채팅 기록 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user) {
+    public ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user, Pageable pageable) {
 
-        List<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreateAtDesc(roomId);
+        Page<ChatMessage> chatMessages = chatMessageRepository.findByChatroom_IdOrderByCreateAtDesc(roomId, pageable);
         List<ChatResponseDTO.ChatMessageResponseDTO> chatMessageResponseDTOList = chatMessages.stream()
                 .map(chatMessage -> ChatResponseDTO.ChatMessageResponseDTO.builder()
                         .chatId(chatMessage.getId())
@@ -63,6 +65,10 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
         return ChatResponseDTO.ChatMessageListResponseDTO.builder()
                 .chatMessageResponseDTOList(chatMessageResponseDTOList)
+                .totalPages(chatMessages.getTotalPages())
+                .totalElements(chatMessages.getTotalElements())
+                .currentPage(chatMessages.getNumber())
+                .pageSize(chatMessages.getSize())
                 .build();
     }
 
@@ -112,9 +118,10 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     // 전체 재팅방 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user) {
+    public ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user, Pageable pageable) {
 
-        List<Chatroom> chatroomList = chatroomRepository.findAll();
+
+        Page<Chatroom> chatroomList = chatroomRepository.getAllPage(pageable);
         List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
                 .map(chatroom -> ChatResponseDTO.PreviewChatroomDTO.builder()
                         .chatroomId(chatroom.getId())
@@ -126,15 +133,19 @@ public class ChatQueryServiceImpl implements ChatQueryService {
                 .collect(Collectors.toList());
         return ChatResponseDTO.PreviewChatroomListDTO.builder()
                 .previewChatroomDTOList(chatroomDTOList)
+                .totalPages(chatroomList.getTotalPages())
+                .totalElements(chatroomList.getTotalElements())
+                .currentPage(chatroomList.getNumber())
+                .pageSize(chatroomList.getSize())
                 .build();
     }
 
     // 사용자가 참여하고있는 채팅방 조회
     @Override
     @Transactional(readOnly = true)
-    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user) {
+    public ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user, Pageable pageable) {
 
-        List<Chatroom> chatroomList = userChatRepository.findChatroomByUser_Id(user.getId());
+        Page<Chatroom> chatroomList = userChatRepository.findChatroomByUser_Id(user.getId(), pageable);
         List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
                 .map(chatroom -> ChatResponseDTO.PreviewChatroomDTO.builder()
                         .isSecret(chatroom.isSecret())
@@ -147,6 +158,10 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
         return ChatResponseDTO.PreviewChatroomListDTO.builder()
                 .previewChatroomDTOList(chatroomDTOList)
+                .totalPages(chatroomList.getTotalPages())
+                .totalElements(chatroomList.getTotalElements())
+                .currentPage(chatroomList.getNumber())
+                .pageSize(chatroomList.getSize())
                 .build();
     }
 

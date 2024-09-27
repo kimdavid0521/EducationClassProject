@@ -2,6 +2,8 @@ package com.example.EducationClassProject.repository;
 
 import com.example.EducationClassProject.domain.Chatroom;
 import com.example.EducationClassProject.domain.mapping.UserChat;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,7 @@ public interface UserChatRepository extends JpaRepository<UserChat, Long> {
     boolean existsByUser_IdAndChatroom_Id(UUID userId, Long chatroomId);
 
     // 해당 사용자가 참여한 채팅방 리스트
-    List<Chatroom> findChatroomByUser_Id(UUID userId);
+    Page<Chatroom> findChatroomByUser_Id(UUID userId, Pageable pageable);
 
     // 유저와 채팅방 사이의 관계 가져오기
     UserChat findByUser_IdAndChatroom_Id(UUID userId, Long chatroomId);

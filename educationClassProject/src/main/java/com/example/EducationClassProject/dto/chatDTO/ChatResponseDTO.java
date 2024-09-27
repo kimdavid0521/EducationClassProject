@@ -28,6 +28,10 @@ public class ChatResponseDTO {
     @AllArgsConstructor
     public static class ChatMessageListResponseDTO {
         List<ChatMessageResponseDTO> chatMessageResponseDTOList;
+        int totalPages;
+        long totalElements;
+        int currentPage;
+        int pageSize;
     }
 
     @Getter
@@ -59,6 +63,10 @@ public class ChatResponseDTO {
     @AllArgsConstructor
     public static class PreviewChatroomListDTO {
         List<PreviewChatroomDTO> previewChatroomDTOList;
+        int totalPages;
+        long totalElements;
+        int currentPage;
+        int pageSize;
     }
 
     @Getter

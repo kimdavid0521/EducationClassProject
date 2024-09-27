@@ -11,6 +11,8 @@ import com.example.EducationClassProject.service.ChatCommandService;
 import com.example.EducationClassProject.service.ChatQueryService;
 import com.example.EducationClassProject.service.ChatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +33,11 @@ public class ChatContoller {
 
     // 채팅 기록 조회
     @GetMapping("/chat/{roomId}")
-    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @AuthUser User user) {
-        return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, user));
+    public BaseResponse<ChatResponseDTO.ChatMessageListResponseDTO> getChatHistory(@PathVariable Long roomId, @AuthUser User user,
+                                                                                   @RequestParam(defaultValue = "0") int page,
+                                                                                   @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(chatQueryService.getChatHistory(roomId, user, pageable));
     }
 
     // 채팅방 생성
@@ -59,14 +64,20 @@ public class ChatContoller {
 
     // 전체 채팅방 조회
     @GetMapping("/all/chatroom")
-    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> getAllChatroom(@AuthUser User user) {
-        return BaseResponse.onSuccess(chatQueryService.getAllChatroom(user));
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> getAllChatroom(@AuthUser User user,
+                                                                               @RequestParam(defaultValue = "0") int page,
+                                                                               @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(chatQueryService.getAllChatroom(user, pageable));
     }
 
     // 사용자가 입장되어있는 채팅방 조회
     @GetMapping("/my/chatroom")
-    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@AuthUser User user) {
-        return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(user));
+    public BaseResponse<ChatResponseDTO.PreviewChatroomListDTO> previewMyChatroom(@AuthUser User user,
+                                                                                  @RequestParam(defaultValue = "0") int page,
+                                                                                  @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(chatQueryService.previewMyChatroom(user, pageable));
     }
 
     // 채팅방 나가기

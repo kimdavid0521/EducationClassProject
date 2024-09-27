@@ -4,6 +4,7 @@ import com.example.EducationClassProject.domain.ChatMessage;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.mapping.UserChat;
 import com.example.EducationClassProject.dto.chatDTO.ChatResponseDTO;
+import org.springframework.data.domain.Pageable;
 
 public interface ChatQueryService {
 
@@ -11,7 +12,7 @@ public interface ChatQueryService {
     ChatResponseDTO.ChatMessageResponseDTO sendMessage(ChatMessage chatMessage);
 
     // 채팅 기록 조회
-    ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user);
+    ChatResponseDTO.ChatMessageListResponseDTO getChatHistory(Long roomId, User user, Pageable pageable);
 
     // 채팅방 조회
     ChatResponseDTO.ResultFindChatroom findChatroom(Long roomId, User user);
@@ -20,9 +21,9 @@ public interface ChatQueryService {
     UserChat findUserChatForOut(Long roomId, User user);
 
     // 전체 채팅방 조회
-    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user);
+    ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user, Pageable pageable);
 
     // 사용자가 참여하고있는 채팅방 조회
-    ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user);
+    ChatResponseDTO.PreviewChatroomListDTO previewMyChatroom(User user, Pageable pageable);
 
 }

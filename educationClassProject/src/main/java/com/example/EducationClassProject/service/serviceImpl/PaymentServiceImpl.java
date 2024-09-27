@@ -28,7 +28,6 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
-    private final JWTUtil jwtUtil;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final IamportClient iamportClient;

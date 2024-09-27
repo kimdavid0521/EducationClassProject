@@ -18,7 +18,6 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JWTUtil jwtUtil;
 
 
     // 유저 회원가입

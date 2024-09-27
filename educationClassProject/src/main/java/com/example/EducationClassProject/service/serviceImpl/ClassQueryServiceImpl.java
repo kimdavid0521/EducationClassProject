@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClassQueryServiceImpl implements ClassQueryService {
 
-    private final JWTUtil jwtUtil;
     private final ClassRepository classRepository;
     private final UserClassRepository userClassRepository;
 

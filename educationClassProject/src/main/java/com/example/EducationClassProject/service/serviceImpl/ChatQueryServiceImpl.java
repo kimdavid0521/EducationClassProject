@@ -30,7 +30,6 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     private final ChatMessageRepository chatMessageRepository;
     private final ChatroomRepository chatroomRepository;
     private final UserChatRepository userChatRepository;
-    private final JWTUtil jwtUtil;
 
     // 메세지 전송
     @Override

@@ -10,6 +10,8 @@ import com.example.EducationClassProject.service.VerifyCommandService;
 import com.example.EducationClassProject.service.VerifyQueryService;
 import com.example.EducationClassProject.service.VerifyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,8 +39,11 @@ public class VerifyCardController {
 
     // 인증서 내역 전체 조회 ( 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회 )
     @GetMapping("/verifyCard/{typeNum}")
-    public BaseResponse<VerifyResponseDTO.PreviewVerifyCardListDTO> previewVerifyCardList(@PathVariable Integer typeNum) {
-        return BaseResponse.onSuccess(verifyQueryService.previewVerifyRequestList(typeNum));
+    public BaseResponse<VerifyResponseDTO.PreviewVerifyCardListDTO> previewVerifyCardList(@PathVariable Integer typeNum,
+                                                                                          @RequestParam(defaultValue = "0") int page,
+                                                                                          @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(verifyQueryService.previewVerifyRequestList(typeNum, pageable));
     }
 
 

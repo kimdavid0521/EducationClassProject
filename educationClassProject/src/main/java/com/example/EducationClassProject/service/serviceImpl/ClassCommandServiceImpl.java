@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ClassCommandServiceImpl implements ClassCommandService {
 
-    private final JWTUtil jwtUtil;
     private final ClassRepository classRepository;
     private final UserClassRepository userClassRepository;
 

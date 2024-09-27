@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ChatCommandServiceImpl implements ChatCommandService {
 
-    private final JWTUtil jwtUtil;
     private final ChatMessageRepository chatMessageRepository;
     private final ChatroomRepository chatroomRepository;
     private final UserChatRepository userChatRepository;

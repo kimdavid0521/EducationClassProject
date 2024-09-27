@@ -23,7 +23,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final JWTUtil jwtUtil;
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
 

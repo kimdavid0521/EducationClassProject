@@ -2,6 +2,7 @@ package com.example.EducationClassProject.service;
 
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.verifyDTO.VerifyResponseDTO;
+import org.springframework.data.domain.Pageable;
 
 public interface VerifyQueryService {
 
@@ -12,7 +13,7 @@ public interface VerifyQueryService {
     VerifyResponseDTO.PreviewVerifyCardDTO previewVerifyCard(User user);
 
     // 인증서 요청 리스트 조회 ( 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회 )
-    VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyRequestList(Integer typeNum);
+    VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyRequestList(Integer typeNum, Pageable pageable);
 
     // 유저 검증 카드 조회 및 해당 유저 반환( 관리자 페이지에서 조회 후 상태 업데이트 해여하기에 cardId로 받았습니다. )
     User getVerifyCardUserForUpdate(Long verifyCardId);

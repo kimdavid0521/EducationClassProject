@@ -11,6 +11,9 @@ import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.VerifyCardRepository;
 import com.example.EducationClassProject.service.VerifyQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +26,6 @@ import java.util.stream.Collectors;
 public class VerifyQueryServiceImpl implements VerifyQueryService {
 
     private final VerifyCardRepository verifyCardRepository;
-    private final JWTUtil jwtUtil;
 
     // 유저 상태 검증 및 검증 요청 보낸적 있는지 확인
     @Override
@@ -66,15 +68,15 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
     // 인증서 요청 리스트 조회 관리자 페이지 1: 전체 조회, 2: 수락된 인증서 조회, 3: 미수락된 인증서 조회
     @Override
     @Transactional(readOnly = true)
-    public VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyRequestList(Integer typeNum) {
+    public VerifyResponseDTO.PreviewVerifyCardListDTO previewVerifyRequestList(Integer typeNum, Pageable pageable) {
 
-        List<VerifyCard> verifyCardList;
+        Page<VerifyCard> verifyCardList;
         if (typeNum.equals(1)) {
-            verifyCardList = verifyCardRepository.findAll(Sort.by(Sort.Direction.DESC, "createAt")); // 검증서 인증 요청 시간순으로 정렬
+            verifyCardList = verifyCardRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "createAt"))); // 검증서 인증 요청 시간순으로 정렬
         } else if (typeNum.equals(2)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"));
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"), pageable);
         } else if (typeNum.equals(3)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"));
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"), pageable);
         } else {
             throw new VerifyHandler(ErrorStatus._BAD_REQUEST);
         }

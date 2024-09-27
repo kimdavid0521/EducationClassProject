@@ -2,6 +2,8 @@ package com.example.EducationClassProject.repository;
 
 import com.example.EducationClassProject.domain.VerifyCard;
 import com.example.EducationClassProject.domain.enums.Verify;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +21,7 @@ public interface VerifyCardRepository extends JpaRepository<VerifyCard, Long> {
 
     // 인증이 완료된 verifyCard 조회
     @Query("SELECT v FROM VerifyCard v WHERE v.user.verify = :verify")
-    List<VerifyCard> findByUserVerify(@Param("verify") Verify verify, Sort sort);
+    Page<VerifyCard> findByUserVerify(@Param("verify") Verify verify, Sort sort, Pageable pageable);
 
 
 }

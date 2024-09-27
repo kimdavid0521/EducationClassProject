@@ -3,6 +3,7 @@ package com.example.EducationClassProject.service;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.dto.userDTO.UserRequestDTO;
 import com.example.EducationClassProject.dto.userDTO.UserResponseDTO;
+import org.springframework.data.domain.Pageable;
 
 public interface UserQueryService {
 
@@ -13,5 +14,5 @@ public interface UserQueryService {
     UserResponseDTO.FindUserResultDTO findUser(User user);
 
     // 유저 전체 조회
-    UserResponseDTO.FindUsersListDTO findAllUsers();
+    UserResponseDTO.FindUsersListDTO findAllUsers(Pageable pageable);
 }

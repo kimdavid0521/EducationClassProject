@@ -9,6 +9,8 @@ import com.example.EducationClassProject.jwt.JWTUtil;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.UserQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,9 +63,9 @@ public class UserQueryServiceImpl implements UserQueryService {
     // 유저 전체 조회
     @Override
     @Transactional(readOnly = true)
-    public UserResponseDTO.FindUsersListDTO findAllUsers() {
+    public UserResponseDTO.FindUsersListDTO findAllUsers(Pageable pageable) {
 
-        List<User> users = userRepository.findAll();
+        Page<User> users = userRepository.getAllPage(pageable);
         List<UserResponseDTO.FindUserResultDTO> userResultDTOList = users.stream()
                 .map(user -> UserResponseDTO.FindUserResultDTO.builder()
                         .userId(user.getId())
@@ -81,6 +83,10 @@ public class UserQueryServiceImpl implements UserQueryService {
 
         return UserResponseDTO.FindUsersListDTO.builder()
                 .userResultDTOList(userResultDTOList)
+                .totalPages(users.getTotalPages())
+                .totalElements(users.getTotalElements())
+                .currentPage(users.getNumber())
+                .pageSize(users.getSize())
                 .build();
     }
 }

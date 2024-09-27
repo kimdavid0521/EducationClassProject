@@ -62,5 +62,9 @@ public class UserResponseDTO {
     @Builder
     public static class FindUsersListDTO {
         List<FindUserResultDTO> userResultDTOList;
+        int totalPages;
+        long totalElements;
+        int currentPage;
+        int pageSize;
     }
 }

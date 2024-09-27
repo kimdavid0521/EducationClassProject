@@ -9,6 +9,8 @@ import com.example.EducationClassProject.service.UserCommandService;
 import com.example.EducationClassProject.service.UserQueryService;
 import com.example.EducationClassProject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,10 +42,12 @@ public class UserController {
             return BaseResponse.onSuccess(userQueryService.findUser(user)); // solid 원칙
     }
 
-    // 유저 전체 조회
+    // 유저 전체 조회 ( 관리자 페이지 )
     @GetMapping("/find/users")
-    public BaseResponse<UserResponseDTO.FindUsersListDTO> findAllUser() {
-        return BaseResponse.onSuccess(userQueryService.findAllUsers());
+    public BaseResponse<UserResponseDTO.FindUsersListDTO> findAllUser(@RequestParam(defaultValue = "0") int page,
+                                                                      @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return BaseResponse.onSuccess(userQueryService.findAllUsers(pageable));
     }
 
     // 유저 삭제 ( 회원 탈퇴 )

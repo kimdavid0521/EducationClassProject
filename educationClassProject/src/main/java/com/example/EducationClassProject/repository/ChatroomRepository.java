@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChatroomRepository extends JpaRepository<Chatroom, Long> {
     // 전체 채팅방 가져오기
-    Page<Chatroom> getAllPage(Pageable pageable);
+    Page<Chatroom> findAll(Pageable pageable);
 }

@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     // 유저 전체 조회
-    Page<User> getAllPage(Pageable pageable);
+    Page<User> findAll(Pageable pageable);
     Optional<User> findByEmail(String email);
 
 }

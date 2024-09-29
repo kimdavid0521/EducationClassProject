@@ -74,9 +74,9 @@ public class VerifyQueryServiceImpl implements VerifyQueryService {
         if (typeNum.equals(1)) {
             verifyCardList = verifyCardRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "createAt"))); // 검증서 인증 요청 시간순으로 정렬
         } else if (typeNum.equals(2)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE, Sort.by(Sort.Direction.DESC, "createAt"), pageable);
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.TRUE,  pageable);
         } else if (typeNum.equals(3)) {
-            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE, Sort.by(Sort.Direction.DESC, "createAt"), pageable);
+            verifyCardList = verifyCardRepository.findByUserVerify(Verify.FALSE,  pageable);
         } else {
             throw new VerifyHandler(ErrorStatus._BAD_REQUEST);
         }

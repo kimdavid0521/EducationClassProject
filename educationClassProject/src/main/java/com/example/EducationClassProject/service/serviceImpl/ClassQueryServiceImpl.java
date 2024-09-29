@@ -115,7 +115,7 @@ public class ClassQueryServiceImpl implements ClassQueryService {
     @Transactional(readOnly = true)
     public ClassResponseDTO.PreviewClassListResultDTO findAllClasses(Pageable pageable) {
 
-        Page<Class> classPage = classRepository.findAllPage(pageable);
+        Page<Class> classPage = classRepository.findAll(pageable);
         List<ClassResponseDTO.PreviewClassResultDTO> classResultDTOList = classPage.stream()
                 .map(clas -> ClassResponseDTO.PreviewClassResultDTO.builder()
                         .classId(clas.getId())

@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.3'
 	id 'io.spring.dependency-management' version '1.1.6'
+//	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'com.example'
@@ -32,13 +33,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	//스웨거 설정
+	// 스웨거 설정
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
 	// 스프링 세큐리티
@@ -53,10 +54,39 @@ dependencies {
 	// iamport
 	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
 
-	//websocket
+	// websocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-}
 
+	// Query dsl
+//	implementation "com.querydsl:querydsl-jpa:5.0.0"
+//	compileOnly "com.querydsl:querydsl-apt:5.0.0:jpa"
+//	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
+
+}
+//
+//def querydslDir = "$buildDir/generated/querydsl"
+
+//querydsl {
+//	jpa = true
+//	querydslSourcesDir = querydslDir
+//}
+//
+//sourceSets {
+//	main.java.srcDir querydslDir
+//}
+//
+//compileQuerydsl {
+//	options.annotationProcessorPath = configurations.annotationProcessor
+//}
+//
+//tasks.withType(JavaCompile).configureEach {
+//	options.encoding = 'UTF-8'
+//}
+
+//sourceSets {
+//	main.java.srcDir querydslDir
+//}
 tasks.named('test') {
 	useJUnitPlatform()
 }
+

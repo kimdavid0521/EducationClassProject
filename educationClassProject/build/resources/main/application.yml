@@ -16,6 +16,11 @@ spring:
     secret: "Epjma2vvW+NPGurRKItFl9f6QMokFo/HwEArhEQS+U4="
     access-token-time: 3600000
 
+logging:
+  level:
+    org:
+      springframework=DEBUG:
+
 iamport:
   api_key: 5600634168535380
   api_secret: MXd3JPiJFofIMeDatBlHJdKtEIR8PiyX91hvp4icZUoGuP6ck09yMTEYasNXpNtChfSxHudCECljOpzN

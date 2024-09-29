@@ -65,7 +65,7 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Transactional(readOnly = true)
     public UserResponseDTO.FindUsersListDTO findAllUsers(Pageable pageable) {
 
-        Page<User> users = userRepository.getAllPage(pageable);
+        Page<User> users = userRepository.findAll(pageable);
         List<UserResponseDTO.FindUserResultDTO> userResultDTOList = users.stream()
                 .map(user -> UserResponseDTO.FindUserResultDTO.builder()
                         .userId(user.getId())

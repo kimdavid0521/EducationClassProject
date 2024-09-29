@@ -21,7 +21,7 @@ public interface VerifyCardRepository extends JpaRepository<VerifyCard, Long> {
 
     // 인증이 완료된 verifyCard 조회
     @Query("SELECT v FROM VerifyCard v WHERE v.user.verify = :verify")
-    Page<VerifyCard> findByUserVerify(@Param("verify") Verify verify, Sort sort, Pageable pageable);
+    Page<VerifyCard> findByUserVerify(@Param("verify") Verify verify, Pageable pageable);
 
 
 }

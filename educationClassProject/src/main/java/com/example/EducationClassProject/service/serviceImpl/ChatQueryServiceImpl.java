@@ -120,7 +120,7 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     public ChatResponseDTO.PreviewChatroomListDTO getAllChatroom(User user, Pageable pageable) {
 
 
-        Page<Chatroom> chatroomList = chatroomRepository.getAllPage(pageable);
+        Page<Chatroom> chatroomList = chatroomRepository.findAll(pageable);
         List<ChatResponseDTO.PreviewChatroomDTO> chatroomDTOList = chatroomList.stream()
                 .map(chatroom -> ChatResponseDTO.PreviewChatroomDTO.builder()
                         .chatroomId(chatroom.getId())

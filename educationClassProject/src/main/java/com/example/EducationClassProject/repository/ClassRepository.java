@@ -22,5 +22,5 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
     Page<Class> findByOwnerId(UUID ownerId, Pageable pageable);
 
     // 강의 목록 전체 조회 페이지 네이션
-    Page<Class> findAllPage(Pageable pageable);
+    Page<Class> findAll(Pageable pageable);
 }

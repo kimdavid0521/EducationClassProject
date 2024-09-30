@@ -1,6 +1,6 @@
 package com.example.EducationClassProject.dto.classDTO;
 
-import com.example.EducationClassProject.domain.Class;
+import com.example.EducationClassProject.domain.Lecture;
 import com.example.EducationClassProject.domain.User;
 import com.example.EducationClassProject.domain.enums.ClassLevel;
 import lombok.AllArgsConstructor;
@@ -54,7 +54,7 @@ public class ClassResponseDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ResultFindClass {
-        Class aClass;
+        Lecture aLecture;
         User user;
     }
 

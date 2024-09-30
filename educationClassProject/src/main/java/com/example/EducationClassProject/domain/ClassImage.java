@@ -16,7 +16,7 @@ public class ClassImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-    private Class aClass;
+    private Lecture aLecture;
 
     @Column(name = "imgUrl")
     private String imgUrl;

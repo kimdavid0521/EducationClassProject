@@ -1,8 +1,8 @@
 package com.example.EducationClassProject.service.serviceImpl;
 
 import com.example.EducationClassProject.jwt.JWTUtil;
-import com.example.EducationClassProject.repository.ClassRepository;
-import com.example.EducationClassProject.repository.UserClassRepository;
+import com.example.EducationClassProject.repository.LectureRepository;
+import com.example.EducationClassProject.repository.UserLectureRepository;
 import com.example.EducationClassProject.repository.UserRepository;
 import com.example.EducationClassProject.service.ClassService;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ClassServiceImpl implements ClassService {
 
-    private final ClassRepository classRepository;
+    private final LectureRepository lectureRepository;
     private final UserRepository userRepository;
-    private final UserClassRepository userClassRepository;
+    private final UserLectureRepository userLectureRepository;
     private final JWTUtil jwtUtil;
 
     // 클래스 생성

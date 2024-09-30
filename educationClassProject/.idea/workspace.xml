@@ -5,57 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="603f3ac6-082b-43d4-b924-e808f8bafe85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/controller/ClassController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/converter/ClassConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/converter/ClassConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/Class$ClassBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/Class.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/ClassImage$ClassImageBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/ClassImage$ClassImageBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/ClassImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/ClassImage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/BookMark$BookMarkBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/BookMark$BookMarkBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/BookMark.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/BookMark.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/Like$LikeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/Like$LikeBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/Like.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/Like.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/UserClass$UserClassBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/UserClass$UserClassBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/UserClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/domain/mapping/UserClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO$ResultFindClass$ResultFindClassBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO$ResultFindClass$ResultFindClassBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO$ResultFindClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO$ResultFindClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/repository/ClassRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/repository/UserClassRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/ClassCommandService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/ClassQueryService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/serviceImpl/ClassCommandServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/serviceImpl/ClassQueryServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/serviceImpl/ClassServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/EducationClassProject/service/serviceImpl/ClassServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/controller/ClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/controller/LectureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/converter/ClassConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/converter/ClassConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/Lecture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/ClassImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/ClassImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/BookMark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/BookMark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/UserClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/domain/mapping/UserClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/dto/classDTO/ClassResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/ClassRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/LectureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/UserClassRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/UserLectureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/ClassCommandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/LectureCommandService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/ClassQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/LectureQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/ClassCommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/LectureCommandServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/ClassQueryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/LectureQueryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/ClassServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/service/serviceImpl/ClassServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/customRepository/OrderRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/customRepository/OrderRepositoryCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/repositoryImpl/OrderRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/repositoryImpl/OrderRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +131,7 @@
       <workItem from="1727602226463" duration="749000" />
       <workItem from="1727602985184" duration="1078000" />
       <workItem from="1727604615665" duration="632000" />
-      <workItem from="1727605258637" duration="4471000" />
+      <workItem from="1727605258637" duration="5346000" />
     </task>
     <servers />
   </component>
@@ -190,7 +143,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/EducationClassProject/repository/repositoryImpl/OrderRepositoryImpl.java</url>
-          <line>19</line>
+          <line>24</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

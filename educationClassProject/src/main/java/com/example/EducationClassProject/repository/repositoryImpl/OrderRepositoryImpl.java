@@ -8,14 +8,16 @@ import com.example.EducationClassProject.repository.customRepository.OrderReposi
 
 //import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
-    private JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
     // orderUid 로 order 객체를 가져옵니다. ( jpa 보다 쿼리문이 성능 측면에서 더 좋아서 쿼리문으로 작성 하였습니다. )
     // ( 한번의 쿼리로 order 와 관련된 payment, user을 즉시 로딩하여(eager) 가져오기 때문입니다. )

@@ -11,8 +11,8 @@ import java.util.UUID;
 @Repository
 public interface UserLectureRepository extends JpaRepository<UserLecture, Long> {
     // 중복 참여 여부 확인
-    @Query("SELECT CASE WHEN COUNT(uc) > 0 THEN true ELSE false END " +
-            "FROM UserLecture uc WHERE uc.user.id = :userId AND uc.aLecture.id = :classId")
-    boolean existsByUserAndALecture(@Param("userId") UUID userId, @Param("classId") Long classId);
+//    @Query("SELECT CASE WHEN COUNT(uc) > 0 THEN true ELSE false END " +
+//            "FROM UserLecture uc WHERE uc.user.id = :userId AND uc.aLecture.id = :classId")
+//    boolean existsByUserAndALecture(@Param("userId") UUID userId, @Param("classId") Long classId);
 
 }

@@ -42,6 +42,7 @@ public class SecurityConfig {
             "/webjars/**",
             "api/v1/classes",
             "/test",
+            "/"
     };
 
     // 로그인 필터 배치
